@@ -15,12 +15,8 @@
                     int creation_state = 1;
 
                     while(creation_state == 1){
-                        int cinput = -1;
-                        util.clearConsole();
-                        util.printCharacterdetails();
-
+                        util.startGame();
                         util.presstoContinue();
-                        
                         creation_state = -1; //ends character creation 
                     }
 
