@@ -9,7 +9,7 @@
                 
                 System.out.println("\n ELDEN ROGUE");
 
-                int input = util.readInt("1.Start Game \n2. End Game", 3);
+                int input = util.readInt("1.Start Game \n2. End Game", 2);
                 
                 if(input == 1){
                     int creation_state = 1;
