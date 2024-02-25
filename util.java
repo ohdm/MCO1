@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class util {
     static Scanner scanner = new Scanner(System.in);
     static Player player;
-   // public static boolean running;
+   public static boolean isrunning = true;
 
 
     //method for basic int inputs w/ prompts
@@ -79,6 +79,16 @@ public class util {
     
     }
 
+    public static void printlobbymenu(){ //lobby
+
+        System.out.println("\t\tLOBBY\n\n");
+        System.out.println("1.FAST TRAVEL");
+        System.out.println("2.LEVEL UP");
+        System.out.println("3.INVENTORY");
+        System.out.println("4.SHOP");
+        System.out.println("5.QUIT GAME");
+    }
+
     //startgame, method for character creation, values here will be passed to player class
     public static void startGame(){
     
@@ -128,9 +138,7 @@ public class util {
         if(cinput == 3){
             clearConsole();
             player = new Player(name, job_index);
-            System.out.println(player.cHP);
-            presstoContinue();
-            //gameloop();
+            gameloop();
         }
 
     
@@ -138,13 +146,16 @@ public class util {
 
 
 
-   /*  public static void gameloop(){
-        while(running){
-
+     public static void gameloop(){
+        while(isrunning){
+        printlobbymenu();
+        presstoContinue();
+        isrunning = false;
         }
 
-    };
-    */
+    }
+    
+
 
     public static void printSeperator(){
         for(int i = 0; i < 50; i++)
