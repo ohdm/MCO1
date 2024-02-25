@@ -60,12 +60,17 @@ public class util {
         return stringname;
     }
 
-    public static void printCharacterdetails(String name, String job){
+    public static void printCharacterdetails(String name, String job, int job_index){
+        
         System.out.println("\tCHARACTER CREATION\n\n");
         System.out.println("Character Name:"+name);
         System.out.println("Job Class:"+job);
         System.out.println("Level: 1");
-        System.out.println("Statistics:");
+        int[] arr = assignclassval(job_index);
+        System.out.println("\nStatistics:");
+        System.out.println("HP:" +arr[0]+ "\tEND:" +arr[3]);
+        System.out.println("DEX:" +arr[1]+ "\tSTR:" +arr[4]);
+        System.out.println("INT:" +arr[2]+ "\tFTH:" +arr[5]);
         System.out.println("--------------------");
         System.out.println("\n\n1.ENTER NAME");
         System.out.println("2.CHOOSE JOB");
@@ -80,12 +85,12 @@ public class util {
         int cinput=-1;
         int state = 1;
         String name = " ";
-        int job_index = 0; //base vagabond
+        int job_index = 1; //base vagabond
         String[] job_class  = {"Debug","Vagabond", "Samurai", "Warrior", "Hero", "Astrologer", "Prophet"};
 
         while(state==1){
         clearConsole();
-        printCharacterdetails(name, job_class[job_index]);
+        printCharacterdetails(name, job_class[job_index], job_index);
         cinput = readInt("->", 4);
 
         if(cinput == 1){
@@ -149,17 +154,73 @@ public class util {
     public static int[] assignclassval(int index){
         int arr[] ={0, 0, 0, 0, 0, 0};
 
-        if(index == 1){
-            arr[0] = 12;
-            arr[1] = 10;
-            arr[2] = 10;
-            arr[3] = 10;
-            arr[4] = 10;
-            arr[5] = 10;
+        if(index == 1){ //vagabond base
+            arr[0] = 15;//hp
+            arr[1] = 13;//dex
+            arr[2] = 9;//int
+            arr[3] = 11;//end
+            arr[4] = 14;//str
+            arr[5] = 9;//fth
             
 
             return arr;
         }
+        else if(index == 2){//samurai base
+            arr[0] = 12;
+            arr[1] = 15;
+            arr[2] = 9;
+            arr[3] = 13;
+            arr[4] = 12;
+            arr[5] = 8;
+            
+
+            return arr;
+        }
+        else if(index == 3){//warrior base
+            arr[0] = 11;
+            arr[1] = 16;
+            arr[2] = 10;
+            arr[3] = 11;
+            arr[4] = 10;
+            arr[5] = 8;
+            
+
+            return arr;
+        }
+        else if(index == 4){//hero base
+            arr[0] = 14;
+            arr[1] = 9;
+            arr[2] = 7;
+            arr[3] = 12;
+            arr[4] = 16;
+            arr[5] = 8;
+            
+
+            return arr;
+        }
+        else if(index == 5){//astroleger base
+            arr[0] = 9;
+            arr[1] = 12;
+            arr[2] = 16;
+            arr[3] = 9;
+            arr[4] = 8;
+            arr[5] = 7;
+            
+
+            return arr;
+        }
+        else if(index == 6){//prophet base
+            arr[0] = 10;
+            arr[1] = 10;
+            arr[2] = 7;
+            arr[3] = 8;
+            arr[4] = 11;
+            arr[5] = 16;
+            
+
+            return arr;
+        }
+        
         else return arr;
     
     }
