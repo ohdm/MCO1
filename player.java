@@ -13,15 +13,12 @@ public class Player extends Character{
 
     //player specific methods
    
-    public int move(){
+    public void move(){
 
-        return 0;
-    } //move method
+     //   System.out.println("move");
+        
+    } 
 
-   
-    public int char_inp(){
 
-        return 0;
-    } //inputs of character
 
 }

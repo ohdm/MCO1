@@ -3,21 +3,19 @@
     public class Main {
         
         public static void main (String[] args) {
-            int GAMESTATE = 1;
+            boolean GAMESTATE = true;
 
-            while (GAMESTATE == 1){
+            while (GAMESTATE == true){
                 
                 System.out.println("\n ELDEN ROGUE");
 
-                int input = util.readInt("1.Start Game \n2. End Game", 2);
+                int input = util.readInt("1.Start Game \n2.End Game", 2);
                 
                 if(input == 1){
-                    int creation_state = 1;
-
-                    while(creation_state == 1){
+                    boolean creation_state = true;
+                    while(creation_state == true){
                         util.startGame();
-                        util.presstoContinue();
-                        creation_state = -1; //ends character creation 
+                        creation_state = false; //ends character creation 
                     }
 
 
@@ -26,7 +24,7 @@
                 else if(input == 2 ){
                 
                     System.out.println("byebye");
-                    GAMESTATE = 0;
+                    GAMESTATE = false;
                 }
 
 

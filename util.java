@@ -3,7 +3,8 @@ import java.util.Scanner;
 public class util {
     static Scanner scanner = new Scanner(System.in);
     static Player player;
-   public static boolean isrunning = true;
+    public static boolean isrunning = true;
+    static area1 area1;
 
 
     //method for basic int inputs w/ prompts
@@ -23,25 +24,6 @@ public class util {
         }while(input < 1 || input > userChoices);
         return input;
     }
-
-
-
-    public static int readINPBASE(int userChoices){  
-        int input;
-
-        do{
-            try {
-            input = Integer.parseInt(scanner.next());
-
-            }catch  (Exception e){
-                input = -1;
-                System.out.println("Please enter an integer!");
-            }
-
-        }while(input < 1 || input > userChoices);
-        return input;
-    }
-
 
 
     public static void clearConsole(){
@@ -82,7 +64,14 @@ public class util {
     public static void printlobbymenu(){ //lobby
 
         System.out.println("\t\tLOBBY\n\n");
-        System.out.println("1.FAST TRAVEL");
+        System.out.println("STATS:");
+        System.out.println("NAME:" +player.name+ "  CLASS:" +player.class_name);
+        System.out.println("LEVEL " +player.cLVL+ "\nHP:" +player.cHP+ "\tEND:" +player.cEND);
+        System.out.println("DEX:" +player.cDEX+ "\tSTR:" +player.cSTR);
+        System.out.println("INT:" +player.cINT+ "\tFTH:" +player.cFTH);
+        System.out.println("--------------------");
+
+        System.out.println("\n\n1.FAST TRAVEL");
         System.out.println("2.LEVEL UP");
         System.out.println("3.INVENTORY");
         System.out.println("4.SHOP");
@@ -96,7 +85,7 @@ public class util {
         int state = 1;
         String name = " ";
         int job_index = 1; //base vagabond
-        String[] job_class  = {"Debug","Vagabond", "Samurai", "Warrior", "Hero", "Astrologer", "Prophet"};
+        String[] job_class  = {"DEBUG","Vagabond", "Samurai", "Warrior", "Hero", "Astrologer", "Prophet"};
 
         while(state==1){
         clearConsole();
@@ -137,7 +126,7 @@ public class util {
 
         if(cinput == 3){
             clearConsole();
-            player = new Player(name, job_index);
+            player = new Player(name, job_index); //calling the player object
             gameloop();
         }
 
@@ -146,24 +135,57 @@ public class util {
 
 
 
-     public static void gameloop(){
-        while(isrunning){
+     public static void gameloop(){ //main game loop
+        while(isrunning){ //boolean, is running default set to true
+        int input=0;
+        clearConsole();
         printlobbymenu();
-        presstoContinue();
-        isrunning = false;
+        
+        input = readInt("->",  6);
+
+        if(input == 1){
+
+            clearConsole();
+
+            area1 = new area1(0,0);
+            startarea1();
+            presstoContinue();
+
+            /* 
+            clearConsole();
+
+            System.out.println("1.Stormvel Castle \n2.WIP \n3.WIP");
+            finput = readInt("Where to fast travel to?", 4);
+
+            if(finput == 1){
+            area1 = new area1();
+            }
+            else
+            System.out.println("WIP");
+            presstoContinue();
+            */
+        }
+        else if(input == 2){
+        
+        }
+        else if(input == 3){
+        System.out.println("INVENTORY UNIMPLEMENTED");
+        }
+        else if(input == 4){
+            System.out.println("SHOP UNIMPLEMENTED");
+        }
+        else if (input == 5){
+            isrunning = false;
+        }
+        //player.move();
+        
         }
 
     }
     
 
-
-    public static void printSeperator(){
-        for(int i = 0; i < 50; i++)
-        System.out.println("-");
-    }
-
     public static int[] assignclassval(int index){
-        int arr[] ={0, 0, 0, 0, 0, 0};
+        int arr[] = new int[6];
 
         if(index == 1){ //vagabond base
             arr[0] = 15;//hp
@@ -236,4 +258,54 @@ public class util {
     
     }
 
+
+
+
+
+
+
+    public static void startarea1(){ //main loop for area1 experimental
+
+        boolean game = true;
+        area1.initizalizemap(area1.floor1, 7, 3);
+        area1.POS_Y = 6;
+        area1.POS_X = 1; //PLAYER POS
+        int POS_inp = 0;
+        area1.floor1[area1.POS_Y][area1.POS_X] = 1; //setting player POS
+
+        while(game){
+            clearConsole();
+            area1.initizalizemap(area1.floor1, 7, 3);
+            area1.floor1[area1.POS_Y][area1.POS_X] = 1;
+            area1.printmap(area1.floor1, 7, 3);
+            System.out.println("POSITION " +area1.POS_X+ ""+area1.POS_Y);
+            POS_inp = readInt("\nINPUT", 6);
+
+                    //temporarily here for readability
+                if(POS_inp == 1){ // forward
+                    area1.POS_Y--;
+                }
+                else if(POS_inp == 2){ //backward
+                    area1.POS_Y++;
+                }
+                else if(POS_inp == 3){ //left
+                    area1.POS_X--;
+                }
+                else if(POS_inp ==4){ //right
+                    area1.POS_X++;
+                 }   
+
+            if(POS_inp == 5){
+                game = false;
+            }
+            
+            //movePOS(POS_inp, area1.POS_Y, area1.POS_X);
+            System.out.println(area1.POS_Y);
+            presstoContinue();
+        }
+   }
+  
+
+
+    
 }
