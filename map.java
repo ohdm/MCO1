@@ -1,7 +1,10 @@
+import java.util.Random; //random encounter
+
 public abstract class map {
     int POS_X;
     int POS_Y;
-    String[] Tiles = {"Player","Spawn", "Boss", "Door", "Fast Travel"};
+    String[] tile = {"SPACE","PLAYER", "SPAWN" ,"DOOR", "FAST TRAVEL", "BOSS"};
+    int[]  tileID = {0,1,2,3,4,5};
 
     public map(int X, int Y){   
         X = 0;
@@ -13,7 +16,7 @@ public abstract class map {
 
         for(int i = 0; i < Y; i++){
             for(int j = 0; j < X; j++){
-                MAP[i][j] = 0;
+                MAP[i][j] = 0; //change to tileID[0] basically setting it to all to SPACE
                 
             }
         }
@@ -32,7 +35,7 @@ public abstract class map {
           
     }
 
-    void checkTile(){
+    void checkTile(int currenttile){
 
     }
 
@@ -48,11 +51,16 @@ public abstract class map {
 
     }
 
+    public void assignPLAYERTILE(int playerpos[] ,int Y , int  X){
+        playerpos[0] = Y;
+        playerpos[1] = X;
+    }
 
-    /*public void movePOS(int input, int Y, int X){
+    /* 
+    public void movePOS(int input, int Y, int X){
     
         if(input == 1){ // forward
-             Y--;
+            Y--;
         }
         else if(input == 2){ //backward
              Y++;
@@ -64,6 +72,6 @@ public abstract class map {
             Y++;
         }
        
-    }*/
-
+    }
+*/
 }

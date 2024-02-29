@@ -259,11 +259,6 @@ public class util {
     }
 
 
-
-
-
-
-
     public static void startarea1(){ //main loop for area1 experimental
 
         boolean game = true;
@@ -275,13 +270,20 @@ public class util {
 
         while(game){
             clearConsole();
-            area1.initizalizemap(area1.floor1, 7, 3);
-            area1.floor1[area1.POS_Y][area1.POS_X] = 1;
+            area1.initizalizemap(area1.floor1, 7, 3); //initialize space
+            area1.initializefloor1(area1.floor1); //initialize tiles
+
+            player.playerTILE = area1.floor1[area1.POS_Y][area1.POS_X]; //get player tile from player POS
+            area1.floor1[area1.POS_Y][area1.POS_X] = area1.tileID[1]; //set to PLAYER tileid
+
             area1.printmap(area1.floor1, 7, 3);
-            System.out.println("POSITION " +area1.POS_X+ ""+area1.POS_Y);
+            
+            System.out.println("POSITION   X: " +area1.POS_X+ " Y: "+area1.POS_Y);
+            System.out.println("Current tile:" +area1.tile[player.playerTILE]);
+
             POS_inp = readInt("\nINPUT", 6);
 
-                    //temporarily here for readability
+                    //temporary fix hehe
                 if(POS_inp == 1){ // forward
                     area1.POS_Y--;
                 }
@@ -294,18 +296,117 @@ public class util {
                 else if(POS_inp ==4){ //right
                     area1.POS_X++;
                  }   
-
+                
             if(POS_inp == 5){
                 game = false;
             }
             
-            //movePOS(POS_inp, area1.POS_Y, area1.POS_X);
-            System.out.println(area1.POS_Y);
-            presstoContinue();
+                
+           // player.movePOS(POS_inp, area1.POS_Y, area1.POS_X); will fix in MCO2
+
+            area1.checkTile(player.playerTILE);
+
         }
+        if(player.playerTILE == 3)
+        startarea2();
+
    }
   
+    public static void startarea2(){
+        boolean game = true;
+        area1.initizalizemap(area1.floor2, 7, 7);
+        area1.POS_Y = 6;
+        area1.POS_X = 3; //PLAYER POS
+        int POS_inp = 0;
+        area1.floor2[area1.POS_Y][area1.POS_X] = 1; //setting player 
+        
+        while(game){
+            clearConsole();
+            area1.initizalizemap(area1.floor2, 7, 7); //initialize space
+            area1.initializefloor2(area1.floor2); //initialize tiles
 
+            player.playerTILE = area1.floor2[area1.POS_Y][area1.POS_X]; //get player tile from player POS
+            area1.floor2[area1.POS_Y][area1.POS_X] = area1.tileID[1]; //set to PLAYER tileid
+
+            area1.printmap(area1.floor2, 7, 7);
+
+            System.out.println("POSITION   X: " +area1.POS_X+ " Y: "+area1.POS_Y);
+            System.out.println("Current tile:" +area1.tile[player.playerTILE]);
+
+            POS_inp = readInt("\nINPUT", 6);
+
+                    //temporary fix hehe
+                if(POS_inp == 1){ // forward
+                    area1.POS_Y--;
+                }
+                else if(POS_inp == 2){ //backward
+                    area1.POS_Y++;
+                }
+                else if(POS_inp == 3){ //left
+                    area1.POS_X--;
+                }
+                else if(POS_inp ==4){ //right
+                    area1.POS_X++;
+                 }   
+                
+            if(POS_inp == 5){
+                game = false;
+            }
+            
+                
+           // player.movePOS(POS_inp, area1.POS_Y, area1.POS_X); will fix in MCO2
+
+            area1.checkTile(player.playerTILE);
+        }
+        if(player.playerTILE == 3 && area1.floor2[0][3] == 1)
+        startarea3();
+        else if(player.playerTILE == 3 && area1.floor2[6][3] == 1)
+        startarea1();
+   }
+
+   public static void startarea3(){
+    boolean game = true;
+    area1.initizalizemap(area1.floor3, 7, 5);
+    area1.POS_Y = 6;
+    area1.POS_X = 2; //PLAYER POS
+    int POS_inp = 0;
+    area1.floor3[area1.POS_Y][area1.POS_X] = 1; //setting player 
+        while(game){
+            clearConsole();
+            area1.initizalizemap(area1.floor3, 7, 5); //initialize space
+            area1.initializefloor3(area1.floor3); //initialize tiles
+
+            player.playerTILE = area1.floor3[area1.POS_Y][area1.POS_X]; //get player tile from player POS
+            area1.floor3[area1.POS_Y][area1.POS_X] = area1.tileID[1]; //set to PLAYER tileid
+
+            area1.printmap(area1.floor3, 7, 5);
+            System.out.println("POSITION   X: " +area1.POS_X+ " Y: "+area1.POS_Y);
+            System.out.println("Current tile:" +area1.tile[player.playerTILE]);
+
+            POS_inp = readInt("\nINPUT", 6);
+
+                    //temporary fix hehe
+                if(POS_inp == 1){ // forward
+                    area1.POS_Y--;
+                }
+                else if(POS_inp == 2){ //backward
+                    area1.POS_Y++;
+                }
+                else if(POS_inp == 3){ //left
+                    area1.POS_X--;
+                }
+                else if(POS_inp ==4){ //right
+                    area1.POS_X++;
+                 }   
+                
+            if(POS_inp == 5){
+                game = false;
+            }
+
+        }
+        if(player.playerTILE == 3)
+        startarea1();
+   }
 
     
 }

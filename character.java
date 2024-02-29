@@ -13,7 +13,7 @@ public abstract class Character {
     public int cFTH;
     public int cXP;
     public int cRUNE;
-
+    public int playerTILE;
 
 
     String[] job_name  = {"Debug","Vagabond", "Samurai", "Warrior", "Hero", "Astrologer", "Prophet"};
@@ -34,7 +34,7 @@ public Character(String name,int index){
     this.cSTR = arr[4];
     this.cFTH = arr[5];
     this.cRUNE = 0;
-    
+    this.playerTILE = 0;
     //int index, int health, int dexterity, int endurance, int strength, int intelligence, int faith, int RUNE
 }
 
