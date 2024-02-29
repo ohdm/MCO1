@@ -1,4 +1,4 @@
-import java.util.Random; //random encounter
+
 
 public abstract class map {
     int POS_X;
@@ -35,9 +35,6 @@ public abstract class map {
           
     }
 
-    void checkTile(int currenttile){
-
-    }
 
     void fastTravel(){
 
@@ -55,6 +52,11 @@ public abstract class map {
         playerpos[0] = Y;
         playerpos[1] = X;
     }
+
+    public void removeTILE(int MAP[][],int Y,int X){
+        MAP[Y][X] = 0;
+    }
+
 
     /* 
     public void movePOS(int input, int Y, int X){

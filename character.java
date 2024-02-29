@@ -38,5 +38,4 @@ public Character(String name,int index){
     //int index, int health, int dexterity, int endurance, int strength, int intelligence, int faith, int RUNE
 }
 
-
 }
