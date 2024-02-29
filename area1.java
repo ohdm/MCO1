@@ -5,19 +5,31 @@ public class area1 extends map {
     public int [][] floor3 = new int[7][5]; // 
     //String[] tile = {"SPACE","PLAYER", "SPAWN" ,"DOOR", "FAST TRAVEL", "BOSS"};
     //int  tileID = 0;
-    
+
+    /*  
+    *area1 child class of abstract class map
+    *contains constructer for area1
+    *contains methods for intialization of map 
+    */
     
     public area1(int POS_X, int POS_Y){
         super(POS_X, POS_Y);
     }
     
+    /*  
+    *initializefloor1()
+    *contains initialization for tiles of floor1
+    */
    public void initializefloor1(int [][] floor1){
         floor1[0][1] = 3; //door    YX
         floor1[1][0] = 2; //spawner
         floor1[1][2] = 2;
         floor1[6][1] = 4; //fast travel
    }
-    
+    /*  
+    *initializefloor2()
+    *contains initialization for tiles of floor2
+    */
    public void initializefloor2(int [][] floor2){
         floor2[1][3]=2;
         floor2[3][0]=2;
@@ -32,6 +44,10 @@ public class area1 extends map {
         floor2[6][3]=3;//doors
    }
 
+   /*  
+    *initializefloor3()
+    *contains initialization for tiles of floor3
+    */
    public void initializefloor3(int [][] floor3){
 
      floor3[6][2] = 3; //door

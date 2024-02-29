@@ -9,7 +9,11 @@ public class Player extends Character{
     }
 
     
-    
+    /*  
+    *PLAYER, CHILD CLASS OF CHARACTER
+    *contains constructer for player
+    *WILL CONTAIN MORE CODES FOR MCO2 
+    */
 
     //player specific methods
 

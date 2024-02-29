@@ -1,6 +1,12 @@
 import java.util.Scanner;
 import java.util.Random;
 
+    /*  
+    *UTIL CLASS OF THE PROGRAM
+    *CONTAINS THE MAIN GAME LOOP, AND IS WHERE PLAYER AND MAP OBJECTS WILL BE CALLED 
+    *CONTAINS VARIOUS HELPER METHODS
+    */
+
 public class util {
     static Scanner scanner = new Scanner(System.in);
     static Player player;
@@ -8,7 +14,10 @@ public class util {
     static area1 area1;
     static Random random = new Random();
 
-    //method for basic int inputs w/ prompts
+    /*  
+    *readInt()
+    *reads integers, also prevents other inputs aside from integers using the try catch function
+    */
     public static int readInt(String prompt, int userChoices){  
         int input;
 
@@ -25,7 +34,10 @@ public class util {
         }while(input < 1 || input > userChoices);
         return input;
     }
-
+    /*  
+    *LEVELUP()
+    *This method calculates LEVELUP cost, and modifies player values for stat level ups
+    */
     public static void LEVELUP (){
         boolean state= true;
         while(state){
@@ -76,28 +88,35 @@ public class util {
             }
         }
     }
-
+    /*  
+    *clearConsole()
+    *This method clears console by printing many spaces
+    */
     public static void clearConsole(){
        for(int i=0; i < 100; i++)
        System.out.println();//prints blank spaces 
 
     }
 
+    /*  
+    *presstoContinue()
+    *allows for gaps, and to allow reading
+    */
+
     public static void presstoContinue(){
         System.out.println("Press to continue...");
         scanner.next();
     }
 
-    public static String getString(String input, String stringname){
-        stringname = input;
-        return stringname;
-    }
-
+    /*  
+    *printCharacterdetails()
+    *This method prints character details for character creation
+    */
     public static void printCharacterdetails(String name, String job, int job_index){
         
         System.out.println("\tCHARACTER CREATION\n\n");
         System.out.println("Character Name:"+name);
-        System.out.println("Job Class:"+job);
+        System.out.println("\nJob Class:"+job);
         System.out.println("Level: 1");
         int[] arr = assignclassval(job_index);
         System.out.println("\nStatistics:");
@@ -111,12 +130,15 @@ public class util {
         System.out.println("4.BACK");
     
     }
-
+    /*  
+    *printlobbymenu()
+    *Prints the lobby menu choices, andd character stats
+    */
     public static void printlobbymenu(){ //lobby
 
         System.out.println("\t\tLOBBY\n\n");
         System.out.println("STATS:");
-        System.out.println("NAME:" +player.name+ "  CLASS:" +player.class_name);
+        System.out.println("NAME:" +player.name+ "\nCLASS:" +player.class_name);
         System.out.println("LEVEL " +player.cLVL+ "\nHP:" +player.cHP+ "\tEND:" +player.cEND);
         System.out.println("DEX:" +player.cDEX+ "\tSTR:" +player.cSTR);
         System.out.println("INT:" +player.cINT+ "\tFTH:" +player.cFTH);
@@ -130,7 +152,11 @@ public class util {
         System.out.println("5.QUIT GAME");
     }
 
-    //startgame, method for character creation, values here will be passed to player class
+    /*  
+    *startGame()
+    *Starts the game loop, calls player object, contains character creation
+    */
+
     public static void startGame(){
     
         int cinput=-1;
@@ -186,7 +212,11 @@ public class util {
     }
 
 
-
+    /*  
+    *gameloop()
+    *this method is the gameloop itself
+    *this method contains fast travel, level up, etc.
+    */
      public static void gameloop(){ //main game loop
         while(isrunning){ //boolean, is running default set to true
         int input=0;
@@ -227,7 +257,11 @@ public class util {
 
     }
     
-
+    /*  
+    *assignclassval()
+    *stores base stats for jobs
+    *assigns stats to player object
+    */
     public static int[] assignclassval(int index){
         int arr[] = new int[6];
 
@@ -303,7 +337,12 @@ public class util {
     }
 
 
-    
+    /*  
+    *startarea1()
+    *contains the loop for area1, and the object for area1
+    *contains many methods of the area class and player class, such as map initialization and tile initialization etc.
+    */
+
     public static void startarea1(int Y, int X){ //main loop for area1 experimental
 
         boolean game = true;
@@ -387,7 +426,10 @@ public class util {
 
    }
   
-
+   /*  
+    *startarea2()
+    *contains the loop for area1 floor2
+    */
     public static void startarea2(int Y, int X){
         boolean game = true;
         area1.initizalizemap(area1.floor2, 7, 7);
@@ -469,7 +511,10 @@ public class util {
         startarea1(0,1);
    }
 
-
+   /*  
+    *startarea3()
+    *contains the loop for area1 floor3
+    */
    public static void startarea3(){
     boolean game = true;
     area1.initizalizemap(area1.floor3, 7, 5);
@@ -524,7 +569,12 @@ public class util {
                 }
       
                 }
-                        
+            
+            if(player.playerTILE == 5){
+                clearConsole();
+                System.out.println("BOSS ENCOUNTERED!");
+                presstoContinue();
+            }
 
             if(POS_inp == 5 && player.playerTILE == 3 ){ //interact
                 game = false;

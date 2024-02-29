@@ -1,5 +1,10 @@
 
-
+    /*  
+    *PARENT abstract class map
+    *contains methods related to map etc.
+    *will contain more codes soon
+    */
+    
 public abstract class map {
     int POS_X;
     int POS_Y;
@@ -10,7 +15,7 @@ public abstract class map {
         X = 0;
         Y = 0;
     }
-
+    
 
     void initizalizemap(int MAP[][], int Y, int X){
 
