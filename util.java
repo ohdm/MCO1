@@ -206,6 +206,7 @@ public class util {
             clearConsole();
             player = new Player(name, job_index); //calling the player object
             gameloop();
+            isrunning = true;
         }
 
     
