@@ -6,8 +6,7 @@
     */
     
 public abstract class map {
-    int POS_X;
-    int POS_Y;
+    int[] POS = {0, 0};
     String[] tile = {"SPACE","PLAYER", "SPAWN" ,"DOOR", "FAST TRAVEL", "BOSS"};
     int[]  tileID = {0,1,2,3,4,5};
 
@@ -17,6 +16,12 @@ public abstract class map {
     }
     
 
+    
+    /** 
+     * @param MAP[][] 2d arrays that stores MAP info
+     * @param Y contains Y VALUE
+     * @param X contains X value
+     */
     void initizalizemap(int MAP[][], int Y, int X){
 
         for(int i = 0; i < Y; i++){
@@ -26,6 +31,7 @@ public abstract class map {
             }
         }
     }
+    
     
     public void printmap(int MAP[][], int Y, int X){
 
@@ -45,8 +51,20 @@ public abstract class map {
 
     }
 
-    void bossTile(){
-
+    int[] checkborder(int[] POS, int Y, int  X){
+        if(POS[0] == Y){
+            POS[0]--;
+        }
+        else if(POS[1] == X){
+            POS[1]--;
+        }
+        else if(POS[1] == 0){
+            POS[1]++;
+        }
+        else if(POS[0] == 0){
+            POS[0]++;
+        }
+        return POS;
     }
 
     void doorTile(){

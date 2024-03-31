@@ -14,6 +14,12 @@ public class util {
     static area1 area1;
     static Random random = new Random();
 
+    
+    /** 
+     * @param prompt stores string prompt
+     * @param userChoices number of limited choices setup for inputs
+     * @return int
+     */
     /*  
     *readInt()
     *reads integers, also prevents other inputs aside from integers using the try catch function
@@ -88,6 +94,194 @@ public class util {
             }
         }
     }
+
+    public static void SHOP(){
+        boolean state = true;
+        int cinput = -1;
+        int input = -1;
+
+        while(state){
+            clearConsole();
+            System.out.println("WELCOME TO THE SHOP\n");
+            System.out.println("RUNES: "+player.cRUNE);
+            cinput = readInt("\n1. Sword\n2.Katana\n3.Whips\n4.Greatswords\n5.Staves\n6.Seal\n7.Back", 7);
+            
+            if(cinput == 1){
+                clearConsole();
+                dispshop(player.wpn_name, cinput ,player.boughtstate, player.weaponstat, 1);
+                input = readInt("->", 4);
+                
+                
+                if(player.boughtstate[cinput][input] == 1){
+                    System.out.println("ITEM IS ALREADY BOUGHT");
+                    presstoContinue();
+                }
+
+                else if (player.boughtstate[cinput][input] == 0){
+                    player.weaponstat(cinput, input, player.weaponstat);
+
+                    if(player.weaponstat[6]<=player.cRUNE){
+                    player.boughtstate[cinput][input] = 1;
+                    System.out.println(player.wpn_name[cinput][input]);
+                    player.cRUNE = player.cRUNE-player.weaponstat[6];
+                    }
+                    else{
+                    System.out.println("NOT ENOUGH RUNES");
+                    presstoContinue();
+                    }
+                }
+            }
+            else if(cinput == 2){
+                clearConsole();
+                dispshop(player.wpn_name, cinput ,player.boughtstate, player.weaponstat, 2);
+                input = readInt("->", 4);
+                
+                
+                if(player.boughtstate[cinput][input] == 1){
+                    System.out.println("ITEM IS ALREADY BOUGHT");
+                    presstoContinue();
+                }
+
+                else if (player.boughtstate[cinput][input] == 0){
+                    player.weaponstat(cinput, input, player.weaponstat);
+
+                    if(player.weaponstat[6]<=player.cRUNE){
+                    player.boughtstate[cinput][input] = 1;
+                    System.out.println(player.wpn_name[cinput][input]);
+                    player.cRUNE = player.cRUNE-player.weaponstat[6];
+                    }
+                    else{
+                    System.out.println("NOT ENOUGH RUNES");
+                    presstoContinue();
+                    }
+                    
+                }
+            }
+            else if(cinput == 3){
+                clearConsole();
+                dispshop(player.wpn_name, cinput ,player.boughtstate, player.weaponstat, 3);
+                input = readInt("->", 4);
+                
+                
+                if(player.boughtstate[cinput][input] == 1){
+                    System.out.println("ITEM IS ALREADY BOUGHT");
+                    presstoContinue();
+                }
+
+                else if (player.boughtstate[cinput][input] == 0){
+                    player.weaponstat(cinput, input, player.weaponstat);
+
+                    if(player.weaponstat[6]<=player.cRUNE){
+                    player.boughtstate[cinput][input] = 1;
+                    System.out.println(player.wpn_name[cinput][input]);
+                    player.cRUNE = player.cRUNE-player.weaponstat[6];
+                    }
+                    else{
+                    System.out.println("NOT ENOUGH RUNES");
+                    presstoContinue();
+                    }
+                    
+                }
+            }
+            else if(cinput == 4){
+                clearConsole();
+                dispshop(player.wpn_name, cinput ,player.boughtstate, player.weaponstat, 4);
+                input = readInt("->", 4);
+                
+                
+                if(player.boughtstate[cinput][input] == 1){
+                    System.out.println("ITEM IS ALREADY BOUGHT");
+                    presstoContinue();
+                }
+
+                else if (player.boughtstate[cinput][input] == 0){
+                    player.weaponstat(cinput, input, player.weaponstat);
+
+                    if(player.weaponstat[6]<=player.cRUNE){
+                    player.boughtstate[cinput][input] = 1;
+                    System.out.println(player.wpn_name[cinput][input]);
+                    player.cRUNE = player.cRUNE-player.weaponstat[6];
+                    }
+                    else{
+                    System.out.println("NOT ENOUGH RUNES");
+                    presstoContinue();
+                    }
+                    
+                }
+            }
+            else if(cinput == 5){
+                clearConsole();
+                dispshop(player.wpn_name, cinput ,player.boughtstate, player.weaponstat, 5);
+                input = readInt("->", 4);
+                
+                
+                if(player.boughtstate[cinput][input] == 1){
+                    System.out.println("ITEM IS ALREADY BOUGHT");
+                    presstoContinue();
+                }
+
+                else if (player.boughtstate[cinput][input] == 0){
+                    player.weaponstat(cinput, input, player.weaponstat);
+
+                    if(player.weaponstat[6]<=player.cRUNE){
+                    player.boughtstate[cinput][input] = 1;
+                    System.out.println(player.wpn_name[cinput][input]);
+                    player.cRUNE = player.cRUNE-player.weaponstat[6];
+                    }
+                    else{
+                    System.out.println("NOT ENOUGH RUNES");
+                    presstoContinue();
+                    }
+                    
+                }
+            }
+            else if(cinput == 6){
+                clearConsole();
+                dispshop(player.wpn_name, cinput ,player.boughtstate, player.weaponstat, 6);
+                input = readInt("->", 4);
+                
+                
+                if(player.boughtstate[cinput][input] == 1){
+                    System.out.println("ITEM IS ALREADY BOUGHT");
+                    presstoContinue();
+                }
+
+                else if (player.boughtstate[cinput][input] == 0){
+                    player.weaponstat(cinput, input, player.weaponstat);
+
+                    if(player.weaponstat[6]<=player.cRUNE){
+                    player.boughtstate[cinput][input] = 1;
+                    System.out.println(player.wpn_name[cinput][input]);
+                    player.cRUNE = player.cRUNE-player.weaponstat[6];
+                    }
+                    else{
+                    System.out.println("NOT ENOUGH RUNES");
+                    presstoContinue();
+                    }
+                    
+                }
+            }
+            else if(cinput == 7){
+                state = false;
+            }
+            cinput = -1;
+        }
+    }
+    
+    public static void dispshop(String[][] name, int input, int[][] boughtstate, int[] weapon, int type){
+
+        for(int i = 1; i<=4; i++){
+        if(boughtstate[type][i] == 0){
+            player.weaponstat(type, i, weapon);
+        System.out.println(i+"."+name[type][i]+ " RUNE COST -> " +weapon[6]);
+        }
+        else if(boughtstate[type][i] == 1){
+        System.out.println(i+"."+name[type][i]+" -BOUGHT-");
+        }
+
+        }
+    }
+
     /*  
     *clearConsole()
     *This method clears console by printing many spaces
@@ -108,6 +302,12 @@ public class util {
         scanner.next();
     }
 
+    
+    /** 
+     * @param name
+     * @param job
+     * @param job_index
+     */
     /*  
     *printCharacterdetails()
     *This method prints character details for character creation
@@ -130,6 +330,10 @@ public class util {
         System.out.println("4.BACK");
     
     }
+    
+    /** 
+     * @param startGame(
+     */
     /*  
     *printlobbymenu()
     *Prints the lobby menu choices, andd character stats
@@ -205,6 +409,7 @@ public class util {
         if(cinput == 3){
             clearConsole();
             player = new Player(name, job_index); //calling the player object
+            player.initializestate(player.boughtstate);
             gameloop();
             isrunning = true;
         }
@@ -213,6 +418,10 @@ public class util {
     }
 
 
+    
+    /** 
+     * @param 1
+     */
     /*  
     *gameloop()
     *this method is the gameloop itself
@@ -234,7 +443,7 @@ public class util {
 
             if(finput == 1){
             area1 = new area1(0,0);
-            startarea1(6,1); 
+            startarea1(7,2); 
             clearConsole();
             }
             else
@@ -246,9 +455,10 @@ public class util {
         }
         else if(input == 3){
         System.out.println("INVENTORY UNIMPLEMENTED");
+            
         }
         else if(input == 4){
-            System.out.println("SHOP UNIMPLEMENTED");
+            SHOP();
         }
         else if (input == 5){
             isrunning = false;
@@ -258,6 +468,12 @@ public class util {
 
     }
     
+
+    
+    /** 
+     * @param index
+     * @return int[]
+     */
     /*  
     *assignclassval()
     *stores base stats for jobs
@@ -338,6 +554,8 @@ public class util {
     }
 
 
+    
+   
     /*  
     *startarea1()
     *contains the loop for area1, and the object for area1
@@ -347,46 +565,34 @@ public class util {
     public static void startarea1(int Y, int X){ //main loop for area1 experimental
 
         boolean game = true;
-        area1.initizalizemap(area1.floor1, 7, 3);
+        area1.initizalizemap(area1.floor1, 9, 5);
         area1.initializefloor1(area1.floor1);
-        area1.POS_Y = Y;
-        area1.POS_X = X; //PLAYER POS Y X
+        area1.POS[0] = Y;
+        area1.POS[1] = X; //PLAYER POS Y X
         int POS_inp = 0;
-        area1.floor1[area1.POS_Y][area1.POS_X] = 1; //setting player POS
+        area1.floor1[area1.POS[0]][area1.POS[1]] = 1; //setting player tile
 
         while(game){
-            try{
+            
             clearConsole();
-            area1.initizalizemap(area1.floor1, 7, 3); //initialize space
+            area1.initizalizemap(area1.floor1, 9, 5); //initialize space
             area1.initializefloor1(area1.floor1); //initialize tiles
 
-            player.playerTILE = area1.floor1[area1.POS_Y][area1.POS_X]; //get player tile from player POS
-            area1.floor1[area1.POS_Y][area1.POS_X] = area1.tileID[1]; //set to PLAYER tileid
+            player.playerTILE = area1.floor1[area1.POS[0]][area1.POS[1]]; //get player tile from player POS
+            area1.floor1[area1.POS[0]][area1.POS[1]] = area1.tileID[1]; //set to PLAYER tileid
 
-            area1.printmap(area1.floor1, 7, 3);
+            area1.printmap(area1.floor1, 9, 5);
             
-            System.out.println("POSITION   X: " +area1.POS_X+ " Y: "+area1.POS_Y);
+            System.out.println("POSITION   X: " +area1.POS[1]+ " Y: "+area1.POS[0]);
             System.out.println("Current tile:" +area1.tile[player.playerTILE]);
 
             POS_inp = readInt("1 FORWARD\t3 LEFT\n2 BACKWARD\t4 RIGHT\nINPUT:\t5 INTERACT", 7);
 
-                    //temporary fix hehe
-                if(POS_inp == 1){ // forward
-                    area1.POS_Y--;
-                }
-                else if(POS_inp == 2){ //backward
-                    area1.POS_Y++;
-                }
-                else if(POS_inp == 3){ //left
-                    area1.POS_X--;
-                }
-                else if(POS_inp ==4){ //right
-                    area1.POS_X++;
-                 }   
-
-
+            player.moveYPOS(area1.POS, POS_inp);
+                   
+                 //enemy encounter
                 if(player.playerTILE == 2){
-                    //  area1.removeTILE(area1.floor1, area1.POS_Y, area1.POS_X);
+                    //  area1.removeTILE(area1.floor1, area1.POS[0], area1.POS[1]);
                 int encounter = 0;
                 int add = 0;
                 encounter = random.nextInt(4)+1;
@@ -396,12 +602,14 @@ public class util {
                     System.out.println("YOU GAINED" +add+ "RUNES!");
                     presstoContinue();
                 }
+
                 else if (encounter > 1){
                     System.out.println(" YOU ENCOUNTERED AN ENEMY!");
                     presstoContinue();
                 }
-      
                 }
+
+                area1.checkborder(area1.POS, 8, 4);
             
  
             if(POS_inp == 5 && player.playerTILE == 3){ //interact
@@ -411,19 +619,14 @@ public class util {
                 game = false;
                 gameloop();
             }
-              
-        }catch (Exception e){
-            area1.POS_Y = Y;
-            area1.POS_X = X;
-        }
-                
-           // player.movePOS(POS_inp, area1.POS_Y, area1.POS_X); will fix in MCO2
+                   
+           
 
             
 
         }
         if(player.playerTILE == 3)
-        startarea2(6,3); //starting pos Y, X
+        startarea2(7,4); //starting pos Y, X
 
    }
   
@@ -433,46 +636,35 @@ public class util {
     */
     public static void startarea2(int Y, int X){
         boolean game = true;
-        area1.initizalizemap(area1.floor2, 7, 7);
-        area1.POS_Y = Y;
-        area1.POS_X = X; //PLAYER POS
+        area1.initizalizemap(area1.floor2, 9, 9);
+        area1.POS[0] = Y;
+        area1.POS[1] = X; //PLAYER POS
         int POS_inp = 0;
-        area1.floor2[area1.POS_Y][area1.POS_X] = 1; //setting player 
+        area1.floor2[area1.POS[0]][area1.POS[1]] = 1; //setting player 
         
         while(game){
-            try{
+            
             clearConsole();
-            area1.initizalizemap(area1.floor2, 7, 7); //initialize space
+            area1.initizalizemap(area1.floor2, 9, 9); //initialize space
             area1.initializefloor2(area1.floor2); //initialize tiles
 
             
 
-            player.playerTILE = area1.floor2[area1.POS_Y][area1.POS_X]; //get player tile from player POS
-            area1.floor2[area1.POS_Y][area1.POS_X] = area1.tileID[1]; //set to PLAYER tileid
+            player.playerTILE = area1.floor2[area1.POS[0]][area1.POS[1]]; //get player tile from player POS
+            area1.floor2[area1.POS[0]][area1.POS[1]] = area1.tileID[1]; //set to PLAYER tileid
 
-            area1.printmap(area1.floor2, 7, 7);
+            area1.printmap(area1.floor2, 9, 9);
 
-            System.out.println("POSITION   X: " +area1.POS_X+ " Y: "+area1.POS_Y);
+            System.out.println("POSITION   X: " +area1.POS[1]+ " Y: "+area1.POS[0]);
             System.out.println("Current tile:" +area1.tile[player.playerTILE]);
 
             POS_inp = readInt("1 FORWARD\t3 LEFT\n2 BACKWARD\t4 RIGHT\nINPUT:\t5 INTERACT", 7);
-
-                    //temporary fix hehe
-                if(POS_inp == 1){ // forward
-                    area1.POS_Y--;
-                }
-                else if(POS_inp == 2){ //backward
-                    area1.POS_Y++;
-                }
-                else if(POS_inp == 3){ //left
-                    area1.POS_X--;
-                }
-                else if(POS_inp ==4){ //right
-                    area1.POS_X++;
-                 }   
+            
+            player.moveYPOS(area1.POS, POS_inp);
+  
 
                 if(player.playerTILE == 2){
-                    //  area1.removeTILE(area1.floor1, area1.POS_Y, area1.POS_X);
+                    //  area1.removeTILE(area1.floor1, area1.POS[0], area1.POS[1]);
                 int encounter = 0;
                 int add = 0;
                 encounter = random.nextInt(4)+1;
@@ -489,6 +681,7 @@ public class util {
       
                   }    
 
+            area1.checkborder(area1.POS, 8, 8);
 
             if(POS_inp == 5 && player.playerTILE == 3){ //interact
                 game = false;
@@ -498,63 +691,49 @@ public class util {
                 gameloop();
             }
             
-        }catch (Exception e){
-            area1.POS_Y = Y;
-            area1.POS_X = X;
+        
         }    
-           // player.movePOS(POS_inp, area1.POS_Y, area1.POS_X); will fix in MCO2
+           
 
         
-        }
-        if(player.playerTILE == 3 && area1.floor2[0][3] == 1)
-        startarea3();
-        else if(player.playerTILE == 3 && area1.floor2[6][3] == 1)
-        startarea1(0,1);
+        
+        if(player.playerTILE == 3 && area1.floor2[1][4] == 1)
+        startarea3(7,3);
+        else if(player.playerTILE == 3 && area1.floor2[7][4] == 1)
+        startarea1(1,2);
    }
 
    /*  
     *startarea3()
     *contains the loop for area1 floor3
     */
-   public static void startarea3(){
+   public static void startarea3(int Y, int X){
     boolean game = true;
-    area1.initizalizemap(area1.floor3, 7, 5);
-    area1.POS_Y = 6;
-    area1.POS_X = 2; //PLAYER POS
+    area1.initizalizemap(area1.floor3, 9, 7);
+    area1.POS[0] = Y;
+    area1.POS[1] = X; //PLAYER POS
     int POS_inp = 0;
-    area1.floor3[area1.POS_Y][area1.POS_X] = 1; //setting player 
+    area1.floor3[area1.POS[0]][area1.POS[1]] = 1; //setting player 
         while(game){
-            try{
+            
             clearConsole();
-            area1.initizalizemap(area1.floor3, 7, 5); //initialize space
+            area1.initizalizemap(area1.floor3, 9, 7); //initialize space
             area1.initializefloor3(area1.floor3); //initialize tiles
 
-            player.playerTILE = area1.floor3[area1.POS_Y][area1.POS_X]; //get player tile from player POS
-            area1.floor3[area1.POS_Y][area1.POS_X] = area1.tileID[1]; //set to PLAYER tileid
+            player.playerTILE = area1.floor3[area1.POS[0]][area1.POS[1]]; //get player tile from player POS
+            area1.floor3[area1.POS[0]][area1.POS[1]] = area1.tileID[1]; //set to PLAYER tileid
 
             
-            area1.printmap(area1.floor3, 7, 5);
-            System.out.println("POSITION   X: " +area1.POS_X+ " Y: "+area1.POS_Y);
+            area1.printmap(area1.floor3, 9, 7);
+            System.out.println("POSITION   X: " +area1.POS[1]+ " Y: "+area1.POS[0]);
             System.out.println("Current tile:" +area1.tile[player.playerTILE]);
 
             POS_inp = readInt("1 FORWARD\t3 LEFT\n2 BACKWARD\t4 RIGHT\nINPUT:\t5 INTERACT", 7);
 
-                    //temporary fix hehe
-                if(POS_inp == 1){ // forward
-                    area1.POS_Y--;
-                }
-                else if(POS_inp == 2){ //backward
-                    area1.POS_Y++;
-                }
-                else if(POS_inp == 3){ //left
-                    area1.POS_X--;
-                }
-                else if(POS_inp ==4){ //right
-                    area1.POS_X++;
-                 }   
+            player.moveYPOS(area1.POS, POS_inp);  
 
             if(player.playerTILE == 2){
-                //  area1.removeTILE(area1.floor1, area1.POS_Y, area1.POS_X);
+                //  area1.removeTILE(area1.floor1, area1.POS[0], area1.POS[1]);
                 int encounter = 0;
                 int add = 0;
                 encounter = random.nextInt(4)+1;
@@ -571,6 +750,9 @@ public class util {
       
                 }
             
+                area1.checkborder(area1.POS, 8, 6);
+
+
             if(player.playerTILE == 5){
                 clearConsole();
                 System.out.println("BOSS ENCOUNTERED!");
@@ -584,13 +766,10 @@ public class util {
                 game = false;
                 gameloop();
             }
-        }catch (Exception e){
-            area1.POS_Y = 6;
-            area1.POS_X = 2;
+        
         }
-        }
-        if(player.playerTILE == 3 && area1.floor3[6][2] == 1)
-        startarea2(0,3);
+        if(player.playerTILE == 3 && area1.floor3[7][3] == 1)
+        startarea2(1,4);
    }
 
     

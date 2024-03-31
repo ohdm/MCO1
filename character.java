@@ -14,14 +14,16 @@ public abstract class Character {
     public int cXP;
     public int cRUNE;
     public int playerTILE;
+    
+    String[] job_name  = {"Debug","Vagabond", "Samurai", "Warrior", "Hero", "Astrologer", "Prophet"};
 
     /*  
     *ABSTRACT CHARACTER CLASS OF THE PROGRAM
     *CONTAINS VALUES FOR PLAYER CHILD CLASS 
     *CONTAINS CONSTRUTOR AND METHODS FOR PLAYER (soon)
     */
+
     
-    String[] job_name  = {"Debug","Vagabond", "Samurai", "Warrior", "Hero", "Astrologer", "Prophet"};
 
 //constructer
 public Character(String name,int index){

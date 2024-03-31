@@ -9,6 +9,13 @@
     */
     public class Main {
         
+        
+        /** 
+         * @param args
+         * THIS IS WHERE THE THE TITLE MENU IS GENERATED AND THE MAIN GAMELOOP IS CALLED
+         * MAIN CLASS OF THE PROGRAM
+         */
+        
         public static void main (String[] args) {
             boolean GAMESTATE = true;
 
