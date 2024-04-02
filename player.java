@@ -1,12 +1,6 @@
 public class Player extends Character{
 
-    String[] item_name = {"Debug",
-    "Short Sword", "Rogier's Rapier", "Coded Sword", "Sword of Night and Flame", //swords ID 1-4
-    "Uchigatana","Moonveil", "Rivers of Blood", "Hand of Malenia", //katanas ID 5-8
-    "Whip", "Urumi", "Throned Whip", "Hoslow's Petal Whip", //whips ID 9-12
-    "Claymore", "Starscourge Greatsword", "Inseperable Sword", "Maliketh's Black Blade", //greatswords ID 13-16
-    "Astrologer's Staff", "Albinauric Staff", "Staff of the Guilty", "Carian Regal Scepter", //Staves ID 17-20
-    "Finger Seal", "Godslayer's Seal", "Golden Order Seal", "Dragon Communion Seal"}; //seals ID 21-24
+    String[] wpn_class = {"Debug","Swords", "Katanas", "Whips", "Greatswords", "Staves", "Seals"}; 
     
     String[][] wpn_name = {{"DEBUG", "DEBUG", "DEBUG", "DEBUG", "DEBUG"}, 
     {"DEBUG", "Short Sword", "Rogier's Rapier", "Coded Sword", "Sword of Night and Flame"},
@@ -16,12 +10,11 @@ public class Player extends Character{
     {"DEBUG", "Astrologer's Staff", "Albinauric Staff", "Staff of the Guilty", "Carian Regal Scepter"},
     {"DEBUG", "Finger Seal", "Godslayer's Seal", "Golden Order Seal", "Dragon Communion Seal"}};
 
-    int[] eqpstate = new int[25]; //will store item ID state 1, 0;
+    int[][] eqpstate = new int[8][8]; 
     int[][] boughtstate = new int[8][8];
-
     int[] weaponstat = new int[7];
 
-    
+    int area3unlock = 0;   
 
     //player constructor
     public Player(String name, int index){
@@ -73,6 +66,20 @@ public class Player extends Character{
             }
         }
     }
+
+    public void printinventory(int[][] boughtstate, String[][] name){
+        
+        for(int i = 1; i<7; i++){
+            System.out.print("\n\n"+wpn_class[i]+ ":\n\n");
+            for(int j = 1; j <7; j++){
+                if(boughtstate[i][j]==1){
+                    System.out.println(name[i][j]);
+                }
+            }
+        }
+        
+    }
+
 
     public void weaponstat( int cinput, int input, int[] weapon){
         if(cinput == 1){//swords

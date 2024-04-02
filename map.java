@@ -4,7 +4,8 @@
     *contains methods related to map etc.
     *will contain more codes soon
     */
-    
+    import java.util.Random;
+
 public abstract class map {
     int[] POS = {0, 0};
     String[] tile = {"SPACE","PLAYER", "SPAWN" ,"DOOR", "FAST TRAVEL", "BOSS"};
@@ -80,23 +81,10 @@ public abstract class map {
         MAP[Y][X] = 0;
     }
 
-
-    /* 
-    public void movePOS(int input, int Y, int X){
-    
-        if(input == 1){ // forward
-            Y--;
-        }
-        else if(input == 2){ //backward
-             Y++;
-        }
-        else if(input == 3){ //left
-             Y--;
-        }
-        else if(input ==4){ //right
-            Y++;
-        }
-       
+    public int encounter(){
+        int this1 = 0;
+        return this1;
     }
-*/
+
+
 }

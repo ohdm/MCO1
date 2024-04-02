@@ -12,6 +12,7 @@ public class util {
     static Player player;
     public static boolean isrunning = true;
     static area1 area1;
+    static area2 area2;
     static Random random = new Random();
 
     
@@ -438,12 +439,17 @@ public class util {
         if(input == 1){
 
             clearConsole();
-            System.out.println("1.Stormveil Castle \n2.WIP \n3.WIP");
+            System.out.println("1.Stormveil Castle \n2.Raya Lucaria Academy \n3.WIP");
             int finput = readInt("Where to fast travel to?", 4);
 
             if(finput == 1){
-            area1 = new area1(0,0);
-            startarea1(7,2); 
+            area1 = new area1(0,0); //creates the area1 object
+            startarea1(7,2);  //starts area1 floor1, stormveil castle
+            clearConsole();
+            }
+            else if(finput == 2){
+            area2 = new area2(0,0); 
+            startmap2area1(1,3);  //starts area2 floor2, raya lucaria academy
             clearConsole();
             }
             else
@@ -454,10 +460,13 @@ public class util {
             LEVELUP();
         }
         else if(input == 3){
-        System.out.println("INVENTORY UNIMPLEMENTED");
+        System.out.println("\tWEAPONS OWNED\n");
+        player.printinventory(player.boughtstate, player.wpn_name);
+        presstoContinue();
             
         }
         else if(input == 4){
+            player.cRUNE = 1000000;
             SHOP();
         }
         else if (input == 5){
@@ -772,5 +781,296 @@ public class util {
         startarea2(1,4);
    }
 
-    
+   public static void startmap2area1(int Y, int X){
+    boolean game = true;
+    area2.initizalizemap(area2.floor1, 7, 7);
+    area2.POS[0] = Y;
+    area2.POS[1] = X; //PLAYER POS
+    int POS_inp = 0;
+    area2.floor1[area2.POS[0]][area2.POS[1]] = 1; //setting player 
+        while(game){
+            
+            clearConsole();
+            area2.initizalizemap(area2.floor1, 7, 7); //initialize space
+            area2.initializefloor1(area2.floor1); //initialize tiles
+
+            player.playerTILE = area2.floor1[area2.POS[0]][area2.POS[1]]; //get player tile from player POS
+            area2.floor1[area2.POS[0]][area2.POS[1]] = area2.tileID[1]; //set to PLAYER tileid
+
+            
+            area2.printmap(area2.floor1, 7, 7);
+            System.out.println("POSITION   X: " +area2.POS[1]+ " Y: "+area2.POS[0]);
+            System.out.println("Current tile:" +area2.tile[player.playerTILE]);
+
+            POS_inp = readInt("1 FORWARD\t3 LEFT\n2 BACKWARD\t4 RIGHT\nINPUT:\t5 INTERACT", 7);
+
+            player.moveYPOS(area2.POS, POS_inp);  
+
+            if(player.playerTILE == 2){
+                //  area2.removeTILE(area2.floor1, area2.POS[0], area2.POS[1]);
+                int encounter = 0;
+                int add = 0;
+                encounter = random.nextInt(4)+1;
+                if(encounter == 1){
+                    add = random.nextInt(100)+50;
+                    player.cRUNE = player.cRUNE + add;
+                    System.out.println("YOU GAINED" +add+ "RUNES!");
+                    presstoContinue();
+                }
+                else if (encounter > 1){
+                    System.out.println(" YOU ENCOUNTERED AN ENEMY!");
+                    presstoContinue();
+                }
+      
+                }
+            
+                area2.checkborder(area2.POS, 6, 6);
+
+
+            if(POS_inp == 5 && player.playerTILE == 3 ){ //interact
+                game = false;
+            }
+            else if(POS_inp == 5 && player.playerTILE == 4){
+                game = false;
+                gameloop();
+            }
+        
+        }
+        if(player.playerTILE == 3 && area2.floor1[5][3] == 1)
+        startmap2area2(1,2);
+   }
+
+   public static void startmap2area2(int Y, int X){
+    boolean game = true;
+    area2.initizalizemap(area2.floor2, 9, 5);
+    area2.POS[0] = Y;
+    area2.POS[1] = X; //PLAYER POS
+    int POS_inp = 0;
+    area2.floor2[area2.POS[0]][area2.POS[1]] = 1; //setting player 
+        while(game){
+            
+            clearConsole();
+            area2.initizalizemap(area2.floor2, 9, 5); //initialize space
+            area2.initializefloor2(area2.floor2); //initialize tiles
+
+            player.playerTILE = area2.floor2[area2.POS[0]][area2.POS[1]]; //get player tile from player POS
+            area2.floor2[area2.POS[0]][area2.POS[1]] = area2.tileID[1]; //set to PLAYER tileid
+
+            
+            area2.printmap(area2.floor2, 9, 5);
+            System.out.println("POSITION   X: " +area2.POS[1]+ " Y: "+area2.POS[0]);
+            System.out.println("Current tile:" +area2.tile[player.playerTILE]);
+
+            POS_inp = readInt("1 FORWARD\t3 LEFT\n2 BACKWARD\t4 RIGHT\nINPUT:\t5 INTERACT", 7);
+
+            player.moveYPOS(area2.POS, POS_inp);  
+
+            if(player.playerTILE == 2){
+                int encounter = 0;
+                int add = 0;
+                encounter = random.nextInt(4)+1;
+                if(encounter == 1){
+                    add = random.nextInt(100)+50;
+                    player.cRUNE = player.cRUNE + add;
+                    System.out.println("YOU GAINED" +add+ "RUNES!");
+                    presstoContinue();
+                }
+                else if (encounter > 1){
+                    System.out.println(" YOU ENCOUNTERED AN ENEMY!");
+                    presstoContinue();
+                }
+      
+                }
+            
+                area2.checkborder(area2.POS, 8, 4);
+
+
+            if(POS_inp == 5 && player.playerTILE == 3 ){ //interact
+                game = false;
+            }
+            else if(POS_inp == 5 && player.playerTILE == 4){
+                game = false;
+                gameloop();
+            }
+        
+        }
+        if(player.playerTILE == 3 && area2.floor2[1][2] == 1)
+        startmap2area1(5,3);
+        if(player.playerTILE == 3 && area2.floor2[4][3] == 1)
+        startmap2area3(4, 1);
+   }
+   
+   public static void startmap2area3(int Y, int X){
+    boolean game = true;
+    area2.initizalizemap(area2.floor3, 9, 7);
+    area2.POS[0] = Y;
+    area2.POS[1] = X; //PLAYER POS
+    int POS_inp = 0;
+    area2.floor3[area2.POS[0]][area2.POS[1]] = 1; //setting player 
+        while(game){
+            
+            clearConsole();
+            area2.initizalizemap(area2.floor3, 9, 7); //initialize space
+            area2.initializefloor3(area2.floor3); //initialize tiles
+
+            player.playerTILE = area2.floor3[area2.POS[0]][area2.POS[1]]; //get player tile from player POS
+            area2.floor3[area2.POS[0]][area2.POS[1]] = area2.tileID[1]; //set to PLAYER tileid
+
+            
+            area2.printmap(area2.floor3, 9, 7);
+            System.out.println("POSITION   X: " +area2.POS[1]+ " Y: "+area2.POS[0]);
+            System.out.println("Current tile:" +area2.tile[player.playerTILE]);
+
+            POS_inp = readInt("1 FORWARD\t3 LEFT\n2 BACKWARD\t4 RIGHT\nINPUT:\t5 INTERACT", 7);
+
+            player.moveYPOS(area2.POS, POS_inp);  
+
+            if(player.playerTILE == 2){
+                int encounter = 0;
+                int add = 0;
+                encounter = random.nextInt(4)+1;
+                if(encounter == 1){
+                    add = random.nextInt(100)+50;
+                    player.cRUNE = player.cRUNE + add;
+                    System.out.println("YOU GAINED" +add+ "RUNES!");
+                    presstoContinue();
+                }
+                else if (encounter > 1){
+                    System.out.println(" YOU ENCOUNTERED AN ENEMY!");
+                    presstoContinue();
+                }
+      
+                }
+            
+                area2.checkborder(area2.POS, 8, 6);
+
+
+            if(POS_inp == 5 && player.playerTILE == 3 ){ //interact
+                game = false;
+            }
+        }
+
+        if(player.playerTILE == 3 && area2.floor3[4][1] == 1)
+        startmap2area2(4,3);
+        if(player.playerTILE == 3 && area2.floor3[1][3] == 1)
+        startmap2area5(8,4);
+        if(player.playerTILE == 3 && area2.floor3[4][5] == 1)
+        startmap2area4(2, 1);
+   }
+
+   public static void startmap2area4(int Y, int X){
+    boolean game = true;
+    area2.initizalizemap(area2.floor4, 5, 8);
+    area2.POS[0] = Y;
+    area2.POS[1] = X; //PLAYER POS
+    int POS_inp = 0;
+    area2.floor4[area2.POS[0]][area2.POS[1]] = 1; //setting player 
+        while(game){
+            
+            clearConsole();
+            area2.initizalizemap(area2.floor4, 5, 8); //initialize space
+            area2.initializefloor4(area2.floor4); //initialize tiles
+
+            player.playerTILE = area2.floor4[area2.POS[0]][area2.POS[1]]; //get player tile from player POS
+            area2.floor4[area2.POS[0]][area2.POS[1]] = area2.tileID[1]; //set to PLAYER tileid
+
+            
+            area2.printmap(area2.floor4, 5, 8);
+            System.out.println("POSITION   X: " +area2.POS[1]+ " Y: "+area2.POS[0]);
+            System.out.println("Current tile:" +area2.tile[player.playerTILE]);
+
+            POS_inp = readInt("1 FORWARD\t3 LEFT\n2 BACKWARD\t4 RIGHT\nINPUT:\t5 INTERACT", 7);
+
+            player.moveYPOS(area2.POS, POS_inp);  
+
+            if(player.playerTILE == 2){
+                int encounter = 0;
+                int add = 0;
+                encounter = random.nextInt(4)+1;
+                if(encounter == 1){
+                    add = random.nextInt(100)+50;
+                    player.cRUNE = player.cRUNE + add;
+                    System.out.println("YOU GAINED" +add+ "RUNES!");
+                    presstoContinue();
+                }
+                else if (encounter > 1){
+                    System.out.println(" YOU ENCOUNTERED AN ENEMY!");
+                    presstoContinue();
+                }
+      
+                }
+            
+                area2.checkborder(area2.POS, 4, 7);
+
+
+            if(POS_inp == 5 && player.playerTILE == 3 ){ //interact
+                game = false;
+            }
+            else if(POS_inp == 5 && player.playerTILE == 4){
+                game = false;
+                gameloop();
+            }
+        
+        }
+        if(player.playerTILE == 3 && area2.floor4[2][1] == 1)
+        startmap2area3(4,5);
+   }
+
+   public static void startmap2area5(int Y, int X){
+    boolean game = true;
+    area2.initizalizemap(area2.floor5, 10, 9);
+    area2.POS[0] = Y;
+    area2.POS[1] = X; //PLAYER POS
+    int POS_inp = 0;
+    area2.floor5[area2.POS[0]][area2.POS[1]] = 1; //setting player 
+        while(game){
+            
+            clearConsole();
+            area2.initizalizemap(area2.floor5, 10, 9); //initialize space
+            area2.initializefloor5(area2.floor5); //initialize tiles
+
+            player.playerTILE = area2.floor5[area2.POS[0]][area2.POS[1]]; //get player tile from player POS
+            area2.floor5[area2.POS[0]][area2.POS[1]] = area2.tileID[1]; //set to PLAYER tileid
+
+            
+            area2.printmap(area2.floor5, 10, 9);
+            System.out.println("POSITION   X: " +area2.POS[1]+ " Y: "+area2.POS[0]);
+            System.out.println("Current tile:" +area2.tile[player.playerTILE]);
+
+            POS_inp = readInt("1 FORWARD\t3 LEFT\n2 BACKWARD\t4 RIGHT\nINPUT:\t5 INTERACT", 7);
+
+            player.moveYPOS(area2.POS, POS_inp);  
+
+            if(player.playerTILE == 2){
+                int encounter = 0;
+                int add = 0;
+                encounter = random.nextInt(4)+1;
+                if(encounter == 1){
+                    add = random.nextInt(100)+50;
+                    player.cRUNE = player.cRUNE + add;
+                    System.out.println("YOU GAINED" +add+ "RUNES!");
+                    presstoContinue();
+                }
+                else if (encounter > 1){
+                    System.out.println(" YOU ENCOUNTERED AN ENEMY!");
+                    presstoContinue();
+                }
+      
+                }
+            
+                area2.checkborder(area2.POS, 9, 8);
+
+
+            if(POS_inp == 5 && player.playerTILE == 3 ){ //interact
+                game = false;
+            }
+            else if(POS_inp == 5 && player.playerTILE == 4){
+                game = false;
+                gameloop();
+            }
+        
+        }
+        if(player.playerTILE == 3 && area2.floor5[8][4] == 1)
+        startmap2area2(1,3);
+   }
 }
