@@ -7,9 +7,11 @@
     import java.util.Random;
 
 public abstract class map {
-    int[] POS = {0, 0};
-    String[] tile = {"SPACE","PLAYER", "SPAWN" ,"DOOR", "FAST TRAVEL", "BOSS"};
-    int[]  tileID = {0,1,2,3,4,5};
+  public int[] POS = {0, 0};
+  public String[] tile = {"SPACE","PLAYER", "SPAWN" ,"DOOR", "FAST TRAVEL", "BOSS"};
+  public int[]  tileID = {0,1,2,3,4,5};
+  public int area1boss_state = 1;
+  public int area2boss_state = 1;
 
     public map(int X, int Y){   
         X = 0;

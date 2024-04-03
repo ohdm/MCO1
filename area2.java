@@ -57,30 +57,30 @@ public class area2 extends map {
 
 
     /* 
-    public static void startmap2area5(int Y, int X){
+    public static void startmap3area3(int Y, int X){
     boolean game = true;
-    area2.initizalizemap(area2.floor5, 10, 9);
-    area2.POS[0] = Y;
-    area2.POS[1] = X; //PLAYER POS
+    area3.initizalizemap(area3.floor3, 11, 5);
+    area3.POS[0] = Y;
+    area3.POS[1] = X; //PLAYER POS
     int POS_inp = 0;
-    area2.floor5[area2.POS[0]][area2.POS[1]] = 1; //setting player 
+    area3.floor3[area3.POS[0]][area3.POS[1]] = 1; //setting player 
         while(game){
             
             clearConsole();
-            area2.initizalizemap(area2.floor5, 10, 9); //initialize space
-            area2.initializefloor5(area2.floor5); //initialize tiles
+            area3.initizalizemap(area3.floor3, 11, 5); //initialize space
+            area3.initializefloor3(area3.floor3); //initialize tiles
 
-            player.playerTILE = area2.floor5[area2.POS[0]][area2.POS[1]]; //get player tile from player POS
-            area2.floor5[area2.POS[0]][area2.POS[1]] = area2.tileID[1]; //set to PLAYER tileid
+            player.playerTILE = area3.floor3[area3.POS[0]][area3.POS[1]]; //get player tile from player POS
+            area3.floor3[area3.POS[0]][area3.POS[1]] = area3.tileID[1]; //set to PLAYER tileid
 
             
-            area2.printmap(area2.floor5, 10, 9);
-            System.out.println("POSITION   X: " +area2.POS[1]+ " Y: "+area2.POS[0]);
-            System.out.println("Current tile:" +area2.tile[player.playerTILE]);
+            area3.printmap(area3.floor3, 11, 5);
+            System.out.println("POSITION   X: " +area3.POS[1]+ " Y: "+area3.POS[0]);
+            System.out.println("Current tile:" +area3.tile[player.playerTILE]);
 
             POS_inp = readInt("1 FORWARD\t3 LEFT\n2 BACKWARD\t4 RIGHT\nINPUT:\t5 INTERACT", 7);
 
-            player.moveYPOS(area2.POS, POS_inp);  
+            player.moveYPOS(area3.POS, POS_inp);  
 
             if(player.playerTILE == 2){
                 int encounter = 0;
@@ -99,7 +99,7 @@ public class area2 extends map {
       
                 }
             
-                area2.checkborder(area2.POS, 9, 8);
+                area3.checkborder(area3.POS, 10, 4);
 
 
             if(POS_inp == 5 && player.playerTILE == 3 ){ //interact
