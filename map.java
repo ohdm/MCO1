@@ -4,14 +4,17 @@
     *contains methods related to map etc.
     *will contain more codes soon
     */
-    import java.util.Random;
+    
 
 public abstract class map {
   public int[] POS = {0, 0};
-  public String[] tile = {"SPACE","PLAYER", "SPAWN" ,"DOOR", "FAST TRAVEL", "BOSS"};
+  public String[] tile = {"SPACE","PLAYER", "SPAWN" ,"DOOR", "FAST TRAVEL", "BOSS", "END"};
   public int[]  tileID = {0,1,2,3,4,5};
-  public int area1boss_state = 1;
-  public int area2boss_state = 1;
+  
+
+public double[][] enemy_type1 = {{0,20,30}, {0,70,80}, {0.20},{0.15},{0.10}};//hp, atk, physdef, sorcdef, incdef
+public double[][] enemy_type2 = {{0,25,35}, {0,110,120}, {0.50},{0.15},{0.20}};
+public double[][] enemy_type3 = {{0,70,80}, {0,120,130}, {0.25},{0.25},{0.20}};
 
     public map(int X, int Y){   
         X = 0;
@@ -35,6 +38,7 @@ public abstract class map {
         }
     }
     
+
     
     public void printmap(int MAP[][], int Y, int X){
 
@@ -49,10 +53,6 @@ public abstract class map {
           
     }
 
-
-    void fastTravel(){
-
-    }
 
     int[] checkborder(int[] POS, int Y, int  X){
         if(POS[0] == Y){

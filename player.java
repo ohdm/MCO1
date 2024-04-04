@@ -17,6 +17,9 @@ public class Player extends Character{
     int[] eqpstat = new int[8];    
 
     int[] tempstat = new int[8];
+    public int area1boss_state = 0;
+    public int area2boss_state = 0;
+    public int area3boss_state = 0;
 
     String[] eqpname = {"NONE", "DEBUG"};
 

@@ -16,6 +16,7 @@ public class util {
     static area3 area3;
     static Random random = new Random();
 
+
     
     /** 
      * @param prompt stores string prompt
@@ -83,7 +84,7 @@ public class util {
                 player.cLVL+=1;
             }
             else if(cinput == 6 && player.cRUNE >= cost){
-                player.cFTH=1;
+                player.cFTH+=1;
                 player.cRUNE= player.cRUNE - cost;
                 player.cLVL+=1;
             }
@@ -480,6 +481,17 @@ public class util {
         int input=0;
         clearConsole();
         printlobbymenu();
+
+        if(player.area1boss_state==1){
+            System.out.println("-GODRICK DEFEATED!-");
+        }
+        if(player.area2boss_state==1){
+            System.out.println("-RENNALA DEFEATED!-");
+        }
+        if(player.area1boss_state == 1 && player.area2boss_state == 1){
+            System.out.println("-ELDEN THRONE UNLOCKED-");
+        }
+        
         
         input = readInt("->",  6);
 
@@ -490,18 +502,23 @@ public class util {
             int finput = readInt("Where to fast travel to?", 4);
 
             if(finput == 1){
-            area1 = new area1(0,0); //creates the area1 object
-            startarea1(7,2);  //starts area1 floor1, stormveil castle
-            clearConsole();
+                area1 = new area1(0,0); //creates the area1 object
+                startarea1(7,2);  //starts area1 floor1, stormveil castle
+                clearConsole();
             }
             else if(finput == 2){
-            area2 = new area2(0,0); 
-            startmap2area1(1,3);  //starts area2 floor2, raya lucaria academy
-            clearConsole();
+                area2 = new area2(0,0); 
+                startmap2area1(1,3);  //starts area2 floor2, raya lucaria academy
+                clearConsole();
             }
             else if(finput == 3){
-            area3 = new area3(0, 0);
-            startmap3area1(9, 2);
+                if(player.area1boss_state==1 && player.area2boss_state==1){
+                    area3 = new area3(0, 0);
+                    startmap3area1(9, 2);
+                }
+                else{
+                    System.out.println("AREA LOCKED!");
+                }
             }
             else
             System.out.println("WIP");
@@ -632,6 +649,9 @@ public class util {
         int POS_inp = 0;
         area1.floor1[area1.POS[0]][area1.POS[1]] = 1; //setting player tile
 
+        int battle = 0;
+        area1.player_HP[0] =  100 * ((player.cHP+player.eqpstat[0])/2);
+
         while(game){
             
             clearConsole();
@@ -644,7 +664,7 @@ public class util {
             area1.printmap(area1.floor1, 9, 5);
             
             System.out.println("POSITION   X: " +area1.POS[1]+ " Y: "+area1.POS[0]);
-            System.out.println("Current tile:" +area1.tile[player.playerTILE]);
+            System.out.println("Current tile:" +area1.tile[player.playerTILE]+"\tHP: "+area1.player_HP[0]);
 
             POS_inp = readInt("1 FORWARD\t3 LEFT\n2 BACKWARD\t4 RIGHT\nINPUT:\t5 INTERACT", 7);
 
@@ -665,14 +685,25 @@ public class util {
                 }
 
                 else if (encounter > 1){
-                    System.out.println(" YOU ENCOUNTERED AN ENEMY!");
-                    presstoContinue();
+                    battle = area1.enemyencounter(area1.player_HP, player.cDEX, player.cINT, player.cEND, player.cSTR, player.cFTH, player.eqpstat);
+                    if(battle == 1){
+                        System.out.println("YOU DIED!");
+                        player.cRUNE = 0;
+                        game = false;
+                        util.presstoContinue();
+                    }
+                    else if(battle == 0){
+                        System.out.println("YOU WON!");
+                        System.out.println("GAINED "+area1.player_rune[0]+" RUNES");
+                        player.cRUNE = player.cRUNE + area1.player_rune[0];
+                        util.presstoContinue();
+                    }
                 }
                 }
 
                 area1.checkborder(area1.POS, 8, 4);
             
- 
+        
             if(POS_inp == 5 && player.playerTILE == 3){ //interact
                 game = false;
             }
@@ -703,6 +734,8 @@ public class util {
         int POS_inp = 0;
         area1.floor2[area1.POS[0]][area1.POS[1]] = 1; //setting player 
         
+
+        int battle = 0;
         while(game){
             
             clearConsole();
@@ -717,7 +750,7 @@ public class util {
             area1.printmap(area1.floor2, 9, 9);
 
             System.out.println("POSITION   X: " +area1.POS[1]+ " Y: "+area1.POS[0]);
-            System.out.println("Current tile:" +area1.tile[player.playerTILE]);
+            System.out.println("Current tile:" +area1.tile[player.playerTILE]+"\tHP: "+area1.player_HP[0]);
 
             POS_inp = readInt("1 FORWARD\t3 LEFT\n2 BACKWARD\t4 RIGHT\nINPUT:\t5 INTERACT", 7);
             
@@ -736,8 +769,21 @@ public class util {
                     presstoContinue();
                 }
                 else if (encounter > 1){
-                    System.out.println(" YOU ENCOUNTERED AN ENEMY!");
-                    presstoContinue();
+                    battle = area1.enemyencounter(area1.player_HP, player.cDEX, player.cINT, player.cEND, player.cSTR, player.cFTH, player.eqpstat);
+
+                    if(battle == 1){
+                        System.out.println("YOU DIED!");
+                        player.cRUNE = 0;
+                        game = false;
+                        util.presstoContinue();
+                    }
+                    else if(battle == 0){
+                        System.out.println("YOU WON!");
+                        System.out.println("GAINED "+area1.player_rune[0]+" RUNES");
+                        player.cRUNE = player.cRUNE + area1.player_rune[0];
+                        util.presstoContinue();
+                    }
+                    
                     }
       
                   }    
@@ -775,6 +821,10 @@ public class util {
     area1.POS[1] = X; //PLAYER POS
     int POS_inp = 0;
     area1.floor3[area1.POS[0]][area1.POS[1]] = 1; //setting player 
+
+    int battle = 0;
+    
+    
         while(game){
             
             clearConsole();
@@ -787,7 +837,7 @@ public class util {
             
             area1.printmap(area1.floor3, 9, 7);
             System.out.println("POSITION   X: " +area1.POS[1]+ " Y: "+area1.POS[0]);
-            System.out.println("Current tile:" +area1.tile[player.playerTILE]);
+            System.out.println("Current tile:" +area1.tile[player.playerTILE]+"\tHP: "+area1.player_HP[0]);
 
             POS_inp = readInt("1 FORWARD\t3 LEFT\n2 BACKWARD\t4 RIGHT\nINPUT:\t5 INTERACT", 7);
 
@@ -805,8 +855,19 @@ public class util {
                     presstoContinue();
                 }
                 else if (encounter > 1){
-                    System.out.println(" YOU ENCOUNTERED AN ENEMY!");
-                    presstoContinue();
+                    battle = area1.enemyencounter(area1.player_HP, player.cDEX, player.cINT, player.cEND, player.cSTR, player.cFTH, player.eqpstat);
+                    if(battle == 1){
+                        System.out.println("YOU DIED!");
+                        player.cRUNE = 0;
+                        game = false;
+                        util.presstoContinue();
+                    }
+                    else if(battle == 0){
+                        System.out.println("YOU WON!");
+                        System.out.println("GAINED "+area1.player_rune[0]+" RUNES");
+                        player.cRUNE = player.cRUNE + area1.player_rune[0];
+                        util.presstoContinue();
+                    }
                 }
       
                 }
@@ -815,9 +876,20 @@ public class util {
 
 
             if(player.playerTILE == 5){
-                clearConsole();
-                System.out.println("BOSS ENCOUNTERED!");
-                presstoContinue();
+                battle = area1.bossencounter(area1.player_HP, player.cDEX, player.cINT, player.cEND, player.cSTR, player.cFTH, player.eqpstat);
+                    if(battle == 1){
+                        System.out.println("YOU DIED!");
+                        player.cRUNE = 0;
+                        game = false;
+                        util.presstoContinue();
+                    }
+                    else if(battle == 0){
+                        System.out.println("GREAT ENEMY FELLED!");
+                        System.out.println("GAINED "+area1.player_rune[0]+" RUNES");
+                        player.cRUNE = player.cRUNE + area1.player_rune[0];
+                        player.area1boss_state =1;
+                        util.presstoContinue();
+                    }
             }
 
             if(POS_inp == 5 && player.playerTILE == 3 ){ //interact
@@ -840,6 +912,10 @@ public class util {
     area2.POS[1] = X; //PLAYER POS
     int POS_inp = 0;
     area2.floor1[area2.POS[0]][area2.POS[1]] = 1; //setting player 
+
+    int battle = 0;
+    area2.player_HP[0] =  100 * ((player.cHP+player.eqpstat[0])/2);
+
         while(game){
             
             clearConsole();
@@ -852,7 +928,7 @@ public class util {
             
             area2.printmap(area2.floor1, 7, 7);
             System.out.println("POSITION   X: " +area2.POS[1]+ " Y: "+area2.POS[0]);
-            System.out.println("Current tile:" +area2.tile[player.playerTILE]);
+            System.out.println("Current tile:" +area2.tile[player.playerTILE]+"\tHP: "+area2.player_HP[0]);
 
             POS_inp = readInt("1 FORWARD\t3 LEFT\n2 BACKWARD\t4 RIGHT\nINPUT:\t5 INTERACT", 7);
 
@@ -870,8 +946,19 @@ public class util {
                     presstoContinue();
                 }
                 else if (encounter > 1){
-                    System.out.println(" YOU ENCOUNTERED AN ENEMY!");
-                    presstoContinue();
+                    battle = area2.enemyencounter(area2.player_HP, player.cDEX, player.cINT, player.cEND, player.cSTR, player.cFTH, player.eqpstat);
+                    if(battle == 1){
+                        System.out.println("YOU DIED!");
+                        player.cRUNE = 0;
+                        game = false;
+                        util.presstoContinue();
+                    }
+                    else if(battle == 0){
+                        System.out.println("YOU WON!");
+                        System.out.println("GAINED "+area2.player_rune[0]+" RUNES");
+                        player.cRUNE = player.cRUNE + area2.player_rune[0];
+                        util.presstoContinue();
+                    }
                 }
       
                 }
@@ -899,6 +986,8 @@ public class util {
     area2.POS[1] = X; //PLAYER POS
     int POS_inp = 0;
     area2.floor2[area2.POS[0]][area2.POS[1]] = 1; //setting player 
+
+    int battle = 0;
         while(game){
             
             clearConsole();
@@ -911,7 +1000,7 @@ public class util {
             
             area2.printmap(area2.floor2, 9, 5);
             System.out.println("POSITION   X: " +area2.POS[1]+ " Y: "+area2.POS[0]);
-            System.out.println("Current tile:" +area2.tile[player.playerTILE]);
+            System.out.println("Current tile:" +area2.tile[player.playerTILE]+"\tHP: "+area2.player_HP[0]);
 
             POS_inp = readInt("1 FORWARD\t3 LEFT\n2 BACKWARD\t4 RIGHT\nINPUT:\t5 INTERACT", 7);
 
@@ -928,8 +1017,19 @@ public class util {
                     presstoContinue();
                 }
                 else if (encounter > 1){
-                    System.out.println(" YOU ENCOUNTERED AN ENEMY!");
-                    presstoContinue();
+                    battle = area2.enemyencounter(area2.player_HP, player.cDEX, player.cINT, player.cEND, player.cSTR, player.cFTH, player.eqpstat);
+                    if(battle == 1){
+                        System.out.println("YOU DIED!");
+                        player.cRUNE = 0;
+                        game = false;
+                        util.presstoContinue();
+                    }
+                    else if(battle == 0){
+                        System.out.println("YOU WON!");
+                        System.out.println("GAINED "+area2.player_rune[0]+" RUNES");
+                        player.cRUNE = player.cRUNE + area2.player_rune[0];
+                        util.presstoContinue();
+                    }
                 }
       
                 }
@@ -958,6 +1058,8 @@ public class util {
     area2.POS[0] = Y;
     area2.POS[1] = X; //PLAYER POS
     int POS_inp = 0;
+
+    int battle = 0;
     area2.floor3[area2.POS[0]][area2.POS[1]] = 1; //setting player 
         while(game){
             
@@ -971,7 +1073,7 @@ public class util {
             
             area2.printmap(area2.floor3, 9, 7);
             System.out.println("POSITION   X: " +area2.POS[1]+ " Y: "+area2.POS[0]);
-            System.out.println("Current tile:" +area2.tile[player.playerTILE]);
+            System.out.println("Current tile:" +area2.tile[player.playerTILE]+"\tHP: "+area2.player_HP[0]);
 
             POS_inp = readInt("1 FORWARD\t3 LEFT\n2 BACKWARD\t4 RIGHT\nINPUT:\t5 INTERACT", 7);
 
@@ -988,8 +1090,19 @@ public class util {
                     presstoContinue();
                 }
                 else if (encounter > 1){
-                    System.out.println(" YOU ENCOUNTERED AN ENEMY!");
-                    presstoContinue();
+                    battle = area2.enemyencounter(area2.player_HP, player.cDEX, player.cINT, player.cEND, player.cSTR, player.cFTH, player.eqpstat);
+                    if(battle == 1){
+                        System.out.println("YOU DIED!");
+                        player.cRUNE = 0;
+                        game = false;
+                        util.presstoContinue();
+                    }
+                    else if(battle == 0){
+                        System.out.println("YOU WON!");
+                        System.out.println("GAINED "+area2.player_rune[0]+" RUNES");
+                        player.cRUNE = player.cRUNE + area2.player_rune[0];
+                        util.presstoContinue();
+                    }
                 }
       
                 }
@@ -1017,6 +1130,7 @@ public class util {
     area2.POS[1] = X; //PLAYER POS
     int POS_inp = 0;
     area2.floor4[area2.POS[0]][area2.POS[1]] = 1; //setting player 
+    int battle = 0;
         while(game){
             
             clearConsole();
@@ -1029,7 +1143,7 @@ public class util {
             
             area2.printmap(area2.floor4, 5, 8);
             System.out.println("POSITION   X: " +area2.POS[1]+ " Y: "+area2.POS[0]);
-            System.out.println("Current tile:" +area2.tile[player.playerTILE]);
+            System.out.println("Current tile:" +area2.tile[player.playerTILE]+"\tHP: "+area2.player_HP[0]);
 
             POS_inp = readInt("1 FORWARD\t3 LEFT\n2 BACKWARD\t4 RIGHT\nINPUT:\t5 INTERACT", 7);
 
@@ -1046,8 +1160,19 @@ public class util {
                     presstoContinue();
                 }
                 else if (encounter > 1){
-                    System.out.println(" YOU ENCOUNTERED AN ENEMY!");
-                    presstoContinue();
+                    battle = area2.enemyencounter(area2.player_HP, player.cDEX, player.cINT, player.cEND, player.cSTR, player.cFTH, player.eqpstat);
+                    if(battle == 1){
+                        System.out.println("YOU DIED!");
+                        player.cRUNE = 0;
+                        game = false;
+                        util.presstoContinue();
+                    }
+                    else if(battle == 0){
+                        System.out.println("YOU WON!");
+                        System.out.println("GAINED "+area2.player_rune[0]+" RUNES");
+                        player.cRUNE = player.cRUNE + area2.player_rune[0];
+                        util.presstoContinue();
+                    }
                 }
       
                 }
@@ -1075,6 +1200,7 @@ public class util {
     area2.POS[1] = X; //PLAYER POS
     int POS_inp = 0;
     area2.floor5[area2.POS[0]][area2.POS[1]] = 1; //setting player 
+    int battle = 0;
         while(game){
             
             clearConsole();
@@ -1087,7 +1213,7 @@ public class util {
             
             area2.printmap(area2.floor5, 10, 9);
             System.out.println("POSITION   X: " +area2.POS[1]+ " Y: "+area2.POS[0]);
-            System.out.println("Current tile:" +area2.tile[player.playerTILE]);
+            System.out.println("Current tile:" +area2.tile[player.playerTILE]+"\tHP: "+area2.player_HP[0]);
 
             POS_inp = readInt("1 FORWARD\t3 LEFT\n2 BACKWARD\t4 RIGHT\nINPUT:\t5 INTERACT", 7);
 
@@ -1104,14 +1230,41 @@ public class util {
                     presstoContinue();
                 }
                 else if (encounter > 1){
-                    System.out.println(" YOU ENCOUNTERED AN ENEMY!");
-                    presstoContinue();
+                    battle = area2.enemyencounter(area2.player_HP, player.cDEX, player.cINT, player.cEND, player.cSTR, player.cFTH, player.eqpstat);
+                    if(battle == 1){
+                        System.out.println("YOU DIED!");
+                        player.cRUNE = 0;
+                        game = false;
+                        util.presstoContinue();
+                    }
+                    else if(battle == 0){
+                        System.out.println("YOU WON!");
+                        System.out.println("GAINED "+area2.player_rune[0]+" RUNES");
+                        player.cRUNE = player.cRUNE + area2.player_rune[0];
+                        util.presstoContinue();
+                    }
                 }
       
                 }
             
                 area2.checkborder(area2.POS, 9, 8);
-
+            
+                if(player.playerTILE == 5){
+                    battle = area2.bossencounter(area2.player_HP, player.cDEX, player.cINT, player.cEND, player.cSTR, player.cFTH, player.eqpstat);
+                        if(battle == 1){
+                            System.out.println("YOU DIED!");
+                            player.cRUNE = 0;
+                            game = false;
+                            util.presstoContinue();
+                        }
+                        else if(battle == 0){
+                            System.out.println("GREAT ENEMY FELLED!");
+                            System.out.println("GAINED "+area2.player_rune[0]+" RUNES");
+                            player.cRUNE = player.cRUNE + area2.player_rune[0];
+                            player.area2boss_state =1;
+                            util.presstoContinue();
+                        }
+                }
 
             if(POS_inp == 5 && player.playerTILE == 3 ){ //interact
                 game = false;
@@ -1134,6 +1287,7 @@ public class util {
     area3.POS[1] = X; //PLAYER POS
     int POS_inp = 0;
     area3.floor1[area3.POS[0]][area3.POS[1]] = 1; //setting player 
+    area3.player_HP[0] =  100 * ((player.cHP+player.eqpstat[0])/2);
         while(game){
             
             clearConsole();
@@ -1153,21 +1307,14 @@ public class util {
             player.moveYPOS(area3.POS, POS_inp);  
 
             if(player.playerTILE == 2){
-                int encounter = 0;
                 int add = 0;
-                encounter = random.nextInt(4)+1;
-                if(encounter == 1){
                     add = random.nextInt(100)+50;
-                    player.cRUNE = player.cRUNE + add;
+                    player.cRUNE = (player.cRUNE + add)*3;
                     System.out.println("YOU GAINED" +add+ "RUNES!");
                     presstoContinue();
                 }
-                else if (encounter > 1){
-                    System.out.println(" YOU ENCOUNTERED AN ENEMY!");
-                    presstoContinue();
-                }
+            
       
-                }
             
                 area3.checkborder(area3.POS, 10, 4);
 
@@ -1193,6 +1340,7 @@ public class util {
     area3.POS[1] = X; //PLAYER POS
     int POS_inp = 0;
     area3.floor2[area3.POS[0]][area3.POS[1]] = 1; //setting player 
+    int battle = 0;
         while(game){
             
             clearConsole();
@@ -1230,6 +1378,21 @@ public class util {
             
                 area3.checkborder(area3.POS, 8, 8);
 
+            if(player.playerTILE == 5){
+                battle = area3.bossencounter(area3.player_HP, player.cDEX, player.cINT, player.cEND, player.cSTR, player.cFTH, player.eqpstat);
+                    if(battle == 1){
+                        System.out.println("YOU DIED!");
+                        player.cRUNE = 0;
+                        game = false;
+                        util.presstoContinue();
+                    }
+                    else if(battle == 0){
+                        System.out.println("GREAT ENEMY FELLED!");
+                        System.out.println("GAINED "+area3.player_rune[0]+" RUNES");
+                        player.cRUNE = player.cRUNE + area3.player_rune[0];
+                        util.presstoContinue();
+                    }
+               }
 
             if(POS_inp == 5 && player.playerTILE == 3 ){ //interact
                 game = false;
@@ -1272,25 +1435,16 @@ public class util {
             player.moveYPOS(area3.POS, POS_inp);  
 
             if(player.playerTILE == 2){
-                int encounter = 0;
                 int add = 0;
-                encounter = random.nextInt(4)+1;
-                if(encounter == 1){
                     add = random.nextInt(100)+50;
-                    player.cRUNE = player.cRUNE + add;
+                    player.cRUNE = (player.cRUNE + add)*3;
                     System.out.println("YOU GAINED" +add+ "RUNES!");
                     presstoContinue();
-                }
-                else if (encounter > 1){
-                    System.out.println(" YOU ENCOUNTERED AN ENEMY!");
-                    presstoContinue();
-                }
-      
                 }
             
                 area3.checkborder(area3.POS, 10, 4);
 
-
+            
             if(POS_inp == 5 && player.playerTILE == 3 ){ //interact
                 game = false;
             }
@@ -1298,11 +1452,21 @@ public class util {
                 game = false;
                 gameloop();
             }
+
+            if(POS_inp == 5 && player.playerTILE == 6){
+                game = false;
+            }
         
         }
         if(player.playerTILE == 3 && area3.floor3[9][2] == 1)
         startmap3area2(1,4);
-   }
 
+
+        clearConsole();
+        System.out.println(" YOU BEAT THE GAME CONGRATS !!!");
+        presstoContinue();
+        isrunning = false;
+   }
+   
 
 }
