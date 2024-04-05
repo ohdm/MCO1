@@ -1,13 +1,12 @@
 
 
     /* MAIN  
-    *MCO1 PROTOTYPE SUBMITTED BY:
-    *CUBARRUBIAS, DION MEL FUCANAN
-    *DEONIO, VINCE ALLEN NATHANIEL
     *MAIN CLASS OF THE PROGRAM
     *THIS IS WHERE THE THE TITLE MENU IS GENERATED AND THE MAIN GAMELOOP IS CALLED
     */
-    public class Main {
+
+
+public class Main {
         
         
         /** 
@@ -29,6 +28,8 @@
                     boolean creation_state = true;
                     while(creation_state == true){
                         util.startGame();
+                        
+
                         creation_state = false; //ends character creation 
                     }
 

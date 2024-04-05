@@ -15,6 +15,9 @@ public class area1 extends map {
      int[] player_rune = {0};
      int[] player_HP = {0}; 
 
+     int[] floor1tile = {1, 1};
+     int[] floor2tile = {1, 1, 1, 1, 1, 1, 1, 1};
+
      public double[][] boss = {{200}, {0,150,300}, {0.35},{0.20},{0.15}};
 
     /*  
@@ -266,10 +269,33 @@ public int bossencounter(int[] pHP, int DEX, int INT, int END, int STR, int FTH,
     *contains initialization for tiles of floor1
     */
    public void initializefloor1(int [][] floor1){
-        floor1[1][2] = 3; //door    YX
-        floor1[2][1] = 2; //spawner
-        floor1[2][3] = 2;
-        floor1[7][2] = 4; //fast travel
+
+     if(POS[0] == 2 && POS[1] == 1 && floor1tile[0] == 1){
+          floor1[2][1] = 2; //spawner
+          floor1tile[0] = 0;
+     }
+     else{
+     floor1[2][1] = 0;
+     }
+
+     if(POS[0] == 2 && POS[1] == 3 && floor1tile[1] == 1){
+          floor1[2][3] = 2;
+          floor1tile[1] = 0;
+     }
+     else{
+     floor1[2][3] = 0;
+     }
+
+
+     floor1[7][2] = 4; //fast travel
+     floor1[1][2] = 3; //door    YX
+
+
+
+     /*floor1[1][2] = 3; //door    YX
+     floor1[2][1] = 2; //spawner
+     floor1[2][3] = 2;
+     floor1[7][2] = 4; //fast travel */
    }
     
     /** 
@@ -279,17 +305,87 @@ public int bossencounter(int[] pHP, int DEX, int INT, int END, int STR, int FTH,
     *contains initialization for tiles of floor2
     */
    public void initializefloor2(int [][] floor2){
-        floor2[2][4]=2;
-        floor2[4][1]=2;
-        floor2[4][3]=2;
-        floor2[4][4]=2;
-        floor2[4][5]=2;
-        floor2[4][7]=2;
-        floor2[6][3]=2;
-        floor2[6][5]=2;
+
+     if(POS[0] == 2 && POS[1] == 4 && floor2tile[0] == 1){
+          floor2[2][4]=2;
+          floor2tile[0] = 0;
+     }
+     else{
+          floor2[2][4]=0;
+     }
+
+     if(POS[0] == 4 && POS[1] == 1 && floor2tile[1] == 1){
+          floor2[4][1]=2;
+          floor2tile[1] = 0;
+     }
+     else{
+          floor2[4][1]=0;
+     }
+
+     if(POS[0] == 4 && POS[1] == 3 && floor2tile[2] == 1){
+          floor2[4][3]=2;
+          floor2tile[2] = 0;
+     }
+     else{
+          floor2[4][3]=0;
+     }
+
+     if(POS[0] == 4 && POS[1] == 4 && floor2tile[3] == 1){
+          floor2[4][4]=2;
+          floor2tile[3] = 0;
+     }
+     else{
+          floor2[4][4] = 0;
+     }
+
+     if(POS[0] == 4 && POS[1] == 5 && floor2tile[4] == 1){
+          floor2[4][5]=2;
+          floor2tile[4] = 0;
+     }
+     else{
+          floor2[4][5] = 0;
+     }
+     
+     if(POS[0] == 4 && POS[1] == 7 && floor2tile[5] == 1){
+          floor2[4][7]=2;
+          floor2tile[5] = 0;
+     }
+     else{
+          floor2[4][7]=0;
+     }
+
+     if(POS[0] == 6 && POS[1] == 3 && floor2tile[6] == 1){
+          floor2[6][3]=2;
+          floor2tile[6] = 0;
+     }
+     else{
+          floor2[6][3]=0;
+     }
+
+     if(POS[0] == 6 && POS[1] == 5 && floor2tile[7] == 1){
+          floor2[6][5]=2;
+          floor2tile[7] = 0;
+     }
+     else{
+          floor2[6][5]=0;
+     }
+     
         
-        floor2[1][4]=3;//doors
-        floor2[7][4]=3;//doors
+     floor2[1][4]=3;//doors
+     floor2[7][4]=3;//doors
+
+
+     /*floor2[2][4]=2;
+     floor2[4][1]=2;
+     floor2[4][3]=2;
+     floor2[4][4]=2;
+     floor2[4][5]=2;
+     floor2[4][7]=2;
+     floor2[6][3]=2;
+     floor2[6][5]=2;
+        
+     floor2[1][4]=3;//doors
+     floor2[7][4]=3;//doors */
    }
 
    

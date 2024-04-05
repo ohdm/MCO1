@@ -53,6 +53,12 @@ public double[][] enemy_type3 = {{0,70,80}, {0,120,130}, {0.25},{0.25},{0.20}};
           
     }
 
+    public void resettiles(int[] tile, int num){
+        for(int i = 0; i < num; i ++){
+            tile[i] = 1;
+        }
+    }
+
 
     int[] checkborder(int[] POS, int Y, int  X){
         if(POS[0] == Y){

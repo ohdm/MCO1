@@ -503,11 +503,18 @@ public class util {
 
             if(finput == 1){
                 area1 = new area1(0,0); //creates the area1 object
+                area1.resettiles(area1.floor1tile, 2);
+                area1.resettiles(area1.floor2tile, 8);
                 startarea1(7,2);  //starts area1 floor1, stormveil castle
                 clearConsole();
             }
             else if(finput == 2){
                 area2 = new area2(0,0); 
+                area2.resettiles(area2.floor1tile, 2);
+                area2.resettiles(area2.floor2tile, 3);
+                area2.resettiles(area2.floor3tile, 2);
+                area2.resettiles(area2.floor4tile, 4);
+                area2.resettiles(area2.floor5tile, 7);
                 startmap2area1(1,3);  //starts area2 floor2, raya lucaria academy
                 clearConsole();
             }
@@ -644,6 +651,7 @@ public class util {
         boolean game = true;
         area1.initizalizemap(area1.floor1, 9, 5);
         area1.initializefloor1(area1.floor1);
+
         area1.POS[0] = Y;
         area1.POS[1] = X; //PLAYER POS Y X
         int POS_inp = 0;
@@ -729,6 +737,8 @@ public class util {
     public static void startarea2(int Y, int X){
         boolean game = true;
         area1.initizalizemap(area1.floor2, 9, 9);
+        area1.initializefloor2(area1.floor2);
+
         area1.POS[0] = Y;
         area1.POS[1] = X; //PLAYER POS
         int POS_inp = 0;
@@ -758,7 +768,7 @@ public class util {
   
 
                 if(player.playerTILE == 2){
-                    //  area1.removeTILE(area1.floor1, area1.POS[0], area1.POS[1]);
+                    
                 int encounter = 0;
                 int add = 0;
                 encounter = random.nextInt(4)+1;
@@ -895,10 +905,23 @@ public class util {
             if(POS_inp == 5 && player.playerTILE == 3 ){ //interact
                 game = false;
             }
-            else if(POS_inp == 5 && player.playerTILE == 4){
+
+            if(POS_inp == 5 && player.playerTILE == 4 && area1.POS[0] != 1 && area1.POS[1] != 3){
                 game = false;
                 gameloop();
             }
+
+            if(POS_inp == 5 && player.playerTILE == 4 && area1.POS[0] == 1 && area1.POS[1] == 3 && player.area1boss_state == 1){
+                game = false;
+                System.out.println("YOU HAVE COMPLETED STORMVEIL CASTLE");
+                presstoContinue();
+                gameloop();
+            }
+            else if(POS_inp == 5 && player.playerTILE == 4 && area1.POS[0] == 1 && area1.POS[1] == 3 && player.area1boss_state == 0){
+                System.out.println("DEFEAT GODRICK TO OPEN THIS FAST TRAVEL");
+                presstoContinue();
+            }
+            
         
         }
         if(player.playerTILE == 3 && area1.floor3[7][3] == 1)
@@ -1183,7 +1206,8 @@ public class util {
             if(POS_inp == 5 && player.playerTILE == 3 ){ //interact
                 game = false;
             }
-            else if(POS_inp == 5 && player.playerTILE == 4){
+
+            if(POS_inp == 5 && player.playerTILE == 4){
                 game = false;
                 gameloop();
             }
@@ -1269,9 +1293,20 @@ public class util {
             if(POS_inp == 5 && player.playerTILE == 3 ){ //interact
                 game = false;
             }
-            else if(POS_inp == 5 && player.playerTILE == 4){
+            if(POS_inp == 5 && player.playerTILE == 4 && area2.POS[0] != 1 && area2.POS[1] != 4){
                 game = false;
                 gameloop();
+            }
+
+            if(POS_inp == 5 && player.playerTILE == 4 && area2.POS[0] == 1 && area2.POS[1] == 4 && player.area2boss_state == 1){
+                game = false;
+                System.out.println("YOU HAVE COMPLETED RAYA LUCARIA ACADEMY");
+                presstoContinue();
+                gameloop();
+            }
+            else if(POS_inp == 5 && player.playerTILE == 4 && area2.POS[0] == 1 && area2.POS[1] == 4 && player.area2boss_state == 0){
+                System.out.println("DEFEAT RENNALA TO OPEN THIS FAST TRAVEL");
+                presstoContinue();
             }
         
         }
@@ -1463,7 +1498,7 @@ public class util {
 
 
         clearConsole();
-        System.out.println(" YOU BEAT THE GAME CONGRATS !!!");
+        System.out.println(" YOU BEAT THE GAME CONGRATS !!!\n THANK YOU FOR PLAYING ELDEN ROGUE!!\n DEVELOPERS: \nCUBARRUBIAS, DION MEL\nDEONIO, VINCE NATHANIEL");
         presstoContinue();
         isrunning = false;
    }
